@@ -22,7 +22,7 @@
     },
     "vn-corporate": {
       "total": 122,
-      "last24h": 57,
+      "last24h": 56,
       "lastItemAt": "2026-11-13T13:00:00Z"
     },
     "commodities": {
@@ -32,7 +32,7 @@
     },
     "global-corporate": {
       "total": 17,
-      "last24h": 6,
+      "last24h": 4,
       "lastItemAt": "2026-11-13T09:11:35Z"
     },
     "bank-rates": {
@@ -46,64 +46,64 @@
       "lastItemAt": "2026-11-11T22:00:00Z"
     }
   },
-  "generatedAt": "2026-11-13T16:18:42Z",
+  "generatedAt": "2026-11-13T17:01:01Z",
   "mode": "live",
   "sources": {
     "vnexpress-kd": {
       "name": "VnExpress",
       "ok": true,
       "items": 60,
-      "new": 1,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     },
     "cafef-ck": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 1,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     },
     "cafef-nh": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 1,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     },
     "cafef-vm": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "cafef-dn": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 1,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     },
     "vietstock-cp": {
       "name": "Vietstock",
       "ok": true,
       "items": 20,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "tuoitre-kd": {
       "name": "Tuổi Trẻ",
       "ok": true,
       "items": 50,
-      "new": 4,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     },
     "thanhnien-kt": {
       "name": "Thanh Niên",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "vneconomy-ck": {
       "name": "VnEconomy",
@@ -114,56 +114,56 @@
       "name": "CNBC",
       "ok": true,
       "items": 30,
-      "new": 4,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 2,
+      "at": "2026-11-13T17:00:40Z"
     },
     "cnbc-econ": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "cnbc-earn": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "marketwatch-top": {
       "name": "MarketWatch",
       "ok": true,
       "items": 10,
-      "new": 5,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 2,
+      "at": "2026-11-13T17:00:40Z"
     },
     "fed-monetary": {
       "name": "Federal Reserve",
       "ok": true,
       "items": 15,
       "new": 0,
-      "at": "2026-11-13T16:17:09Z"
+      "at": "2026-11-13T17:00:40Z"
     },
     "ecb-press": {
       "name": "ECB",
       "ok": true,
       "items": 15,
-      "new": 4,
-      "at": "2026-11-13T16:17:09Z"
+      "new": 0,
+      "at": "2026-11-13T17:00:40Z"
     }
   },
   "jobs": {
     "news": {
-      "lastRun": "2026-11-13T16:17:09Z",
+      "lastRun": "2026-11-13T17:00:40Z",
       "ok": true,
-      "newItems": 21,
-      "stored": 525
+      "newItems": 4,
+      "stored": 529
     },
     "market": {
-      "lastRun": "2026-11-13T16:17:20Z",
+      "lastRun": "2026-11-13T17:00:56Z",
       "ok": true,
-      "fetched": 45,
+      "fetched": 21,
       "live": [
         "AAPL",
         "ACB",
@@ -224,8 +224,8 @@
       "errors": []
     },
     "alerts": {
-      "lastRun": "2026-11-13T16:17:41Z",
-      "candidates": 1,
+      "lastRun": "2026-11-13T17:01:00Z",
+      "candidates": 0,
       "skipped": "quiet hours"
     },
     "digest": {
@@ -233,9 +233,9 @@
       "slot": "On-demand"
     },
     "telegram": {
-      "lastRun": "2026-11-13T16:17:41Z",
+      "lastRun": "2026-11-13T17:01:00Z",
       "ok": true,
-      "commands": 1
+      "commands": 0
     }
   },
   "translate": {
