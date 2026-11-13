@@ -2,7 +2,7 @@
 
 **Financial & Economic Intelligence Center**: a hub that collects, tracks and classifies financial and economic information.
 
-> **Status: Phase 1–4 complete · live at https://adrian-nguyenx.github.io/afa/ · next: Phase 5 (Investment Intelligence), after review.**
+> **Status: Phase 1–4 complete · live at https://adrian-nguyenx.github.io/afa/ · next: Phase 5 (Investment Intelligence).**
 > With the automation run, the site shows **real** news, prices, FX and deposit rates (badge **LIVE**); anything without a live source, or the whole site when no live data is reachable, falls back to **MOCK DATA**.
 
 ## Run it
@@ -283,7 +283,7 @@ The Claude API is billed separately from a Claude Pro plan.
 1. Phase 1: Intelligence Center (web, mock data). *Completed.*
 2. Phase 2: 3D Financial Intelligence Center. *Completed.*
 3. Phase 3: Automation & Intelligence Distribution (Email/Telegram). *Completed.*
-4. Phase 4: Go Live. *Completed (awaiting review).*
+4. Phase 4: Go Live. *Completed.*
 5. Phase 5: Investment Intelligence.
 
 Each phase starts only after the previous one has been reviewed and confirmed.
