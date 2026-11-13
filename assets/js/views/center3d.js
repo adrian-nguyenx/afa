@@ -62,7 +62,8 @@ AFA.views = AFA.views || {};
             <button data-go="overview" class="on">Overview</button>
             <button data-go="hero" style="--c:#ffc857">★ ${esc(H.name)}</button>
             ${divisions.map(d => `<button data-go="div:${esc(d.id)}" style="--c:${esc(d.color)}">${esc(d.nameEn)}</button>`).join('')}
-            <button data-tour class="c3d-tour" title="Adrian walks through every division and inspects it">▶ Supervisor Tour</button>
+            <button data-fp class="c3d-fpbtn" title="Walk the HQ as Adrian in first person and inspect every division">◉ Supervisor Mode</button>
+            <button data-tour class="c3d-tour" title="Automatic tour: Adrian walks through every division and inspects it">▶ Guided Tour</button>
             <button data-fs class="c3d-fs" title="Full screen (F)">⛶ Full screen</button>
           </nav>
         </div>
@@ -71,7 +72,7 @@ AFA.views = AFA.views || {};
         <div class="c3d-sup-status" hidden></div>
         <div class="c3d-sup" hidden></div>
         <div class="c3d-tip" hidden></div>
-        <div class="c3d-hint">Drag to orbit · Scroll to zoom · Click a division, desk, person or screen · F full screen · Esc for overview</div>
+        <div class="c3d-hint">Drag to orbit · Scroll to zoom · Click a division, desk, person or screen · ◉ Supervisor Mode to walk as Adrian · F full screen · Esc for overview</div>
         <div class="c3d-loading">Opening the headquarters…</div>
       </section>`;
       const root = el.querySelector('.c3d');
@@ -149,6 +150,11 @@ AFA.views = AFA.views || {};
     const animators = [];            // functions (t, dt) run every frame
     const animated = [];             // canvas textures redrawn on an interval
     const pickables = { coarse: [], fine: [] }; // coarse: wings/desks; fine: people/screens
+    // Supervisor Mode (first person): floor-plan colliders and inspectable spots, in parent-local coordinates.
+    // Converted to world space once every group is placed (see "Supervisor Mode" below).
+    const solidsL = [], roundsL = [], fpItemsL = [];
+    const solid = (parent, w, d, x, z) => solidsL.push({ parent, w, d, x, z });
+    const round = (parent, r, x, z) => roundsL.push({ parent, r, x, z });
 
     function canvasTex(w, h, draw, every) {
       const c = document.createElement('canvas'); c.width = w; c.height = h;
@@ -622,6 +628,7 @@ AFA.views = AFA.views || {};
       box(parent, 0.6, 0.6, 0.6, x, 0.3, z, M(0xd9d4c7));
       const f = new THREE.Mesh(new THREE.IcosahedronGeometry(0.62 * h, 0), M(0x2f6b3a, { flatShading: true }));
       f.position.set(x, 0.6 + 0.62 * h, z); f.scale.y = 1.35; parent.add(f);
+      round(parent, 0.5, x, z);
     }
     function chair(parent, x, z, ry) {
       const c = new THREE.Group(); c.position.set(x, 0, z); c.rotation.y = ry; parent.add(c);
@@ -688,6 +695,7 @@ AFA.views = AFA.views || {};
       chair(g, 0, -0.18, 0);
       const p = person(g0, 0, -0.18, 0, meta);
       p.station = g0;
+      if (meta.dept) fpItemsL.push({ parent: g0, x: 0, z: 0.45, r: 2.4, kind: 'dept', deptId: meta.dept.id, name: `Workstation · ${meta.dept.name}`, sub: `AI agent ${meta.dept.agent.name} · ${meta.dept.agent.code}` });
       setRoutine(p, pick([
         [['type', 7, 13], ['read', 4, 7], ['type', 6, 10], ['chat', 3, 5]],
         [['read', 5, 8], ['type', 6, 11], ['chat', 3, 5], ['type', 5, 9]],
@@ -1021,6 +1029,8 @@ AFA.views = AFA.views || {};
     box(lobby, 10, 1.15, 1.4, 0, 0.58, 15, M(0xece9e2, { roughness: 0.4 }));
     box(lobby, 10.2, 0.08, 1.6, 0, 1.18, 15, M(0x8a6a4a, { roughness: 0.5 }));
     box(lobby, 10, 0.14, 0.05, 0, 0.92, 15.72, M(0x00e5ff, { emissive: 0x00a6c0 }));
+    solid(lobby, 10.6, 3.0, 0, 14.6);   // reception counter + staff behind it
+    [-6.5, 6.5].forEach(x => round(lobby, 0.3, x, 18.5));
     [-2.2, 2.2].forEach(x => { chair(lobby, x, 13.9, 0); const r = person(lobby, x, 13.9, 0, { role: 'Receptionist' }); setRoutine(r, [['type', 6, 10], ['idle', 3, 5], ['chat', 3, 4]]); });
     const logoTex = canvasTex(1536, 512, (g, w, h) => {
       const grd = g.createLinearGradient(0, 0, w, h); grd.addColorStop(0, '#0d1430'); grd.addColorStop(1, '#151b3d');
@@ -1057,11 +1067,13 @@ AFA.views = AFA.views || {};
     }, 0.09);
     [-1, 1].forEach(side => {
       box(lobby, 0.4, 7, 26, side * (LOBBY_W / 2 - 0.2), 3.5, 2, M(0x1b2030));
+      solid(lobby, 0.8, 26, side * (LOBBY_W / 2 - 0.4), 2);
       screenMesh(lobby, 25, 5.25, wallTex, side * (LOBBY_W / 2 - 0.45), 3.6, 2, -side * Math.PI / 2, { title: 'Global markets video wall', desc: 'Live market ticker and key indices.' });
     });
     [[-20, 12], [20, 12]].forEach(([x, z]) => {
       box(lobby, 4, 0.48, 1.2, x, 0.24, z, M(0x3b4459)); box(lobby, 4, 0.7, 0.32, x, 0.62, z + 0.55, M(0x3b4459));
       box(lobby, 1.6, 0.42, 0.9, x, 0.21, z - 1.6, M(0x8a6a4a));
+      solid(lobby, 4.6, 3.0, x, z - 0.65);   // sofa + coffee table + visitor
       plant(lobby, x + 3, z + 0.3);
       const v = person(lobby, x - 1, z - 0.1, Math.PI, { role: 'Visitor' }); setRoutine(v, [['read', 8, 14], ['idle', 4, 6]]); v.act = 'read';
     });
@@ -1070,6 +1082,8 @@ AFA.views = AFA.views || {};
     // Intelligence Hub: platform, globe, division panels
     const hub = new THREE.Group(); hub.position.set(0, 0, -2); lobby.add(hub);
     const hubPos = new THREE.Vector3(0, 0, lobbyZ - 2);
+    round(hub, 6.4, 0, 0);   // the floating division panels circle inside this radius
+    fpItemsL.push({ parent: hub, x: 0, z: 0, r: 10.5, kind: 'overview', name: 'Intelligence Hub', sub: 'Command overview · all divisions' });
     hub.add(new THREE.Mesh(new THREE.CylinderGeometry(7, 7.4, 0.3, 64), M(0x0f1636, { emissive: 0x0a1a44, metalness: 0.6, roughness: 0.3 }))).position.y = 0.15;
     const hubRing = new THREE.Mesh(new THREE.TorusGeometry(7.05, 0.06, 8, 120), new THREE.MeshBasicMaterial({ color: 0x00e5ff })); hubRing.rotation.x = Math.PI / 2; hubRing.position.y = 0.31; hub.add(hubRing);
     const globeG = new THREE.Group(); globeG.position.y = 4.4; hub.add(globeG);
@@ -1112,8 +1126,11 @@ AFA.views = AFA.views || {};
       box(g, WING_W, 8, 0.4, 0, 4, -depth / 2, wallMat);
       box(g, WING_W, 1.1, 0.4, 0, 0.55, depth / 2, wallMat);
       box(g, WING_W, 0.08, 0.42, 0, 1.12, depth / 2, M(d.color, { emissive: col.clone().multiplyScalar(0.6) }));
+      solid(g, 0.4, depth + 0.4, WING_W / 2, 0); solid(g, WING_W, 0.4, 0, -depth / 2); solid(g, WING_W, 0.4, 0, depth / 2);
+      fpItemsL.push({ parent: g, x: -WING_W / 2 + 3, z: 0, r: 4.5, kind: 'div', wing, name: d.nameEn, sub: `Division ${d.code} · ${d.departments.length} desks` });
       [[-depth / 2, -2.2], [2.2, depth / 2]].forEach(([a, b]) => {
         const len = b - a, mid = (a + b) / 2;
+        solid(g, 0.14, len, -WING_W / 2, mid);
         const gl = new THREE.Mesh(boxGeo(0.06, 3.4, len), glassMat); gl.position.set(-WING_W / 2, 1.7, mid); g.add(gl);
         box(g, 0.12, 0.1, len, -WING_W / 2, 3.42, mid, frameMat); box(g, 0.12, 0.06, len, -WING_W / 2, 0.03, mid, frameMat);
         box(g, 0.14, 0.06, len, -WING_W / 2, 3.52, mid, M(d.color, { emissive: col.clone().multiplyScalar(0.7) }));
@@ -1144,6 +1161,10 @@ AFA.views = AFA.views || {};
         const ph = new THREE.Mesh(boxGeo(34, 4.3, 13.5), new THREE.MeshBasicMaterial()); ph.visible = false; ph.position.set(1.5, 2.15, pz);
         ph.userData = { type: 'dept', pod }; g.add(ph); pickables.coarse.push(ph);
         // 6 workstations: two facing rows
+        solid(g, 4.8, 6.3, -9.8, pz);   // the whole desk cluster (desks, chairs, seated staff)
+        round(g, 3.35, 1, pz);          // holo-table
+        solid(g, 0.6, 11.8, WING_W / 2 - 0.4, pz);   // wall display
+        fpItemsL.push({ parent: g, x: 1, z: pz, r: 5.4, kind: 'dept', pod, name: `${p.name} — AI agent ${p.agent.name}`, sub: `${p.agent.code} · ${p.agent.title}` });
         [-2.2, 0, 2.2].forEach(dz => {
           pod.people.push(workstation(g, -11.5, pz + dz, Math.PI / 2, meta));
           pod.people.push(workstation(g, -8.0, pz + dz, -Math.PI / 2, meta));
@@ -1191,6 +1212,7 @@ AFA.views = AFA.views || {};
       // meeting room near the front
       const mz = depth / 2 - 7.5, mx = 6;
       const mr = new THREE.Group(); mr.position.set(mx, 0, mz); g.add(mr);
+      solid(mr, 16, 0.14, 0, -5.5); solid(mr, 0.14, 11, -8, 0); round(mr, 3.4, 0, 0); solid(mr, 5.6, 0.4, 0, 5.2);
       [[0, -5.5, 16, 0.06], [-8, 0, 0.06, 11]].forEach(([x, z, w, dd]) => {
         const gl = new THREE.Mesh(boxGeo(w, 3.4, dd), glassMat); gl.position.set(x, 1.7, z); mr.add(gl);
         box(mr, Math.max(w, 0.12), 0.08, Math.max(dd, 0.12), x, 3.42, z, frameMat);
@@ -1224,6 +1246,7 @@ AFA.views = AFA.views || {};
       const cz = depth / 2 - 6;
       const ct = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.05, 24), M(0xece9e2)); ct.position.set(-15, 1.08, cz); g.add(ct);
       box(g, 0.1, 1.08, 0.1, -15, 0.54, cz, frameMat);
+      round(g, 0.7, -15, cz); solid(g, 1.6, 0.8, -18.8, cz);
       box(g, 1.4, 1.1, 0.6, -18.8, 0.55, cz, M(0x3b4459)); box(g, 0.4, 0.5, 0.35, -18.8, 1.35, cz, M(0x22262e));
       const t1 = person(g, -15, cz - 0.95, 0, { division: d }), t2 = person(g, -15, cz + 0.95, Math.PI, { division: d });
       [t1, t2].forEach(tp => setRoutine(tp, [['talk', 20, 40]]));
@@ -1332,6 +1355,7 @@ AFA.views = AFA.views || {};
     const navBtns = root.querySelectorAll('.c3d-nav [data-go]');
     const setNav = id => navBtns.forEach(b => b.classList.toggle('on', b.dataset.go === id));
     let selectedPod = null, current = { kind: 'overview' };
+    let sup = null;   // Supervisor Mode controller (created below)
     function highlight(pod) { if (selectedPod) selectedPod.outline.visible = false; selectedPod = pod; if (pod) pod.outline.visible = true; }
     function activitySummary(list) {
       const counts = {}; list.forEach(p => { counts[p.act] = (counts[p.act] || 0) + 1; });
@@ -1378,6 +1402,7 @@ AFA.views = AFA.views || {};
       info.innerHTML = CLOSE + html;
     }
     function go(target, fromTour) {
+      if (sup && sup.on) sup.exit({ silent: true });
       if (!fromTour) stopTour();
       info.hidden = false; follow = null; info.dataset.kind = '';
       if (target === 'overview') { highlight(null); controls.autoRotate = !reduceMotion; current = { kind: 'overview' }; flyTo(views.overview); setNav('overview'); }
@@ -1485,7 +1510,7 @@ AFA.views = AFA.views || {};
       const st = stops[tour.i];
       const verb = tour.paused ? 'Paused · ' + (tour.phase === 'walking' ? 'heading to' : 'at')
         : tour.phase === 'walking' ? 'Heading to' : tour.phase === 'waiting' ? 'Inspected (press Next)' : tour.phase === 'complete' ? 'Inspection complete' : 'Currently inspecting';
-      supEl.innerHTML = `<div class="h"><span class="k">SUPERVISOR TOUR — ${pad2(tour.i + 1)} / ${pad2(stops.length)}</span>
+      supEl.innerHTML = `<div class="h"><span class="k">GUIDED TOUR — ${pad2(tour.i + 1)} / ${pad2(stops.length)}</span>
           <span class="now">${esc(verb)}: <b style="color:${esc(st.color)}">${esc(st.name)}</b></span></div>
         <ol class="steps">${stops.map((s, i) => `<li class="${i === tour.i ? 'cur' : tour.done.has(i) ? 'ok' : ''}" style="--c:${esc(s.color)}"><button data-sup="jump" data-i="${i}" title="${esc(s.name)}"><i>${tour.done.has(i) && i !== tour.i ? '✓' : pad2(i + 1)}</i>${esc(s.short)}</button></li>`).join('')}</ol>
         <div class="ctl">
@@ -1532,7 +1557,7 @@ AFA.views = AFA.views || {};
       tour.on = false; tour.paused = false; tour.phase = 'idle';
       supEl.hidden = true; bannerEl.hidden = true; statusEl.hidden = true; scanOff();
       root.classList.remove('c3d-touring');
-      tourBtn.textContent = '▶ Supervisor Tour'; tourBtn.classList.remove('on');
+      tourBtn.textContent = '▶ Guided Tour'; tourBtn.classList.remove('on');
       hero.route = routeTo(stops[stops.length - 1]); hero.routeIdx = 0; hero.returning = true;   // walks home, then patrols
     }
     function togglePause() { if (!tour.on) return; tour.paused = !tour.paused; renderTourUi(); }
@@ -1638,7 +1663,8 @@ AFA.views = AFA.views || {};
     document.addEventListener('fullscreenchange', syncFs); document.addEventListener('webkitfullscreenchange', syncFs);
     root.addEventListener('click', e => {
       if (e.target.closest('[data-fs]')) { toggleFs(); return; }
-      if (e.target.closest('[data-close]')) { info.hidden = true; return; }
+      if (e.target.closest('[data-close]')) { info.hidden = true; if (sup.on) { highlight(null); sup.onInfoClosed(true); } return; }
+      if (e.target.closest('[data-fp]')) { sup.on ? sup.exit() : sup.enter(); return; }
       if (e.target.closest('[data-tour]')) { tour.on ? stopTour() : startTour(); return; }
       const b = e.target.closest('[data-go]'); if (b) go(b.dataset.go);
     });
@@ -1661,6 +1687,7 @@ AFA.views = AFA.views || {};
       return c ? { hit: c.object.userData, mesh: c.object } : null;
     }
     renderer.domElement.addEventListener('pointermove', e => {
+      if (sup.on) return;
       const r0 = pickAt(e), m = r0 && r0.hit;
       if (hoveredPod && hoveredPod !== selectedPod) hoveredPod.outline.visible = false;
       hoveredPod = m && m.type === 'dept' ? m.pod : m && m.type === 'person' && m.p.dept ? depts[m.p.dept.id] : null;
@@ -1678,6 +1705,7 @@ AFA.views = AFA.views || {};
     // dragging during the Supervisor Tour pauses it (free orbit); Resume hands the camera back to the tour
     renderer.domElement.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; controls.autoRotate = false; if (tour.on && !tour.paused) togglePause(); });
     renderer.domElement.addEventListener('pointerup', e => {
+      if (sup.on) return;
       if (!downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) return;
       const r0 = pickAt(e); if (!r0) return;
       const m = r0.hit;
@@ -1688,6 +1716,7 @@ AFA.views = AFA.views || {};
     });
     const onKey = e => {
       if (e.target.closest && e.target.closest('input, textarea, select')) return;
+      if (sup.on) { sup.onKey(e); return; }
       if (tour.on) {
         if (e.key === 'Escape') { stopTour(); return; }
         if (e.key === 'ArrowRight' && tour.i < stops.length - 1) { tour.paused = false; goToStop(tour.i + 1); return; }
@@ -1698,6 +1727,43 @@ AFA.views = AFA.views || {};
       if (e.key === 'f' || e.key === 'F') toggleFs();
     };
     window.addEventListener('keydown', onKey);
+
+    // ---------------------------------------------------------------- Supervisor Mode (first person, views/center3d-supervisor.js)
+    const lodRange = { people: 75, items: 85 };
+    let texSlow = 1;
+    const toWorldBox = s => {
+      const xs = [], zs = [];
+      [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([a, b]) => { const v = s.parent.localToWorld(new THREE.Vector3(s.x + a * s.w / 2, 0, s.z + b * s.d / 2)); xs.push(v.x); zs.push(v.z); });
+      return { minX: Math.min(...xs), maxX: Math.max(...xs), minZ: Math.min(...zs), maxZ: Math.max(...zs) };
+    };
+    const toWorld = o => o.parent.localToWorld(new THREE.Vector3(o.x, 0, o.z));
+    const colliders = {
+      boxes: solidsL.map(toWorldBox),
+      circles: roundsL.map(c => { const v = toWorld(c); return { x: v.x, z: v.z, r: c.r }; }),
+      bounds: { minX: -(C + WING_W) - 0.2, maxX: C + WING_W + 0.2, minZ: zCursor + 6 - 0.2, maxZ: lobbyZ + LOBBY_D / 2 - 0.5 },
+    };
+    const fpItems = fpItemsL.map(o => Object.assign({}, o, { pos: toWorld(o), pod: o.pod || (o.deptId && depts[o.deptId]) || null }));
+    sup = AFA.c3dSupervisor ? AFA.c3dSupervisor.create({
+      THREE, scene, camera, controls, root, hero, wings, depts, people, pickables, colliders, items: fpItems,
+      HUB, C, WING_W, wingOf,
+      selectedPod: () => selectedPod,
+      openInfo(c) { controls.autoRotate = false; follow = null; tween = null; current = c; info.hidden = false; info.dataset.kind = ''; highlight(c.pod || null); renderInfo(); },
+      closeInfo() { info.hidden = true; highlight(null); },
+      infoHidden: () => info.hidden,
+      beforeEnter() { stopTour(true); tween = null; follow = null; info.hidden = true; tip.hidden = true; highlight(null); setNav(''); },
+      toggleFs, isFs,
+      setMax(on) { root.classList.toggle('c3d-max', on); document.body.classList.toggle('c3d-lock', on); syncFs(); },
+      setPerf(low) {
+        renderer.setPixelRatio(low ? 1 : Math.min(window.devicePixelRatio || 1, 1.5));
+        lodRange.people = low ? 40 : 75; lodRange.items = low ? 50 : 85; texSlow = low ? 2 : 1; lodNext = 0; resize();
+      },
+      // the low back rim light (skyline silhouettes) causes a grazing-angle glare on the glossy hub platform at eye level
+      fpLook(on) { rim.intensity = on ? 0.04 : 0.35; },
+      routeHome: () => routeTo(stops[stops.length - 1]),
+      go,
+    }) : { on: false, enter() {}, exit() {}, update() {}, onKey() {}, onInfoClosed() {}, dispose() {} };
+    root.querySelector('[data-fp]').hidden = !AFA.c3dSupervisor;
+    viewEl.__c3dSup = sup;   // debugging hook (read-only use)
 
     // ---------------------------------------------------------------- loop
     function resize() { const w = host.clientWidth || 800, h = host.clientHeight || 500; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
@@ -1713,11 +1779,11 @@ AFA.views = AFA.views || {};
       const cp = camera.position;
       people.forEach(p => {
         if (p.hero) return;
-        const near = p.root.getWorldPosition(lodV).distanceTo(cp) < 75 || (current.kind === 'person' && current.p === p);
+        const near = p.root.getWorldPosition(lodV).distanceTo(cp) < lodRange.people || (current.kind === 'person' && current.p === p);
         if (near !== p.near) { p.near = near; p.lod.forEach(o => { o.visible = near; }); }
       });
       lodItems.forEach(it => {
-        const near = it.anchor.getWorldPosition(lodV).distanceTo(cp) < 85;
+        const near = it.anchor.getWorldPosition(lodV).distanceTo(cp) < lodRange.items;
         if (near !== it.near) { it.near = near; it.obj.visible = near; }
       });
     }
@@ -1734,7 +1800,7 @@ AFA.views = AFA.views || {};
     }
     function frame() {
       if (!viewEl.isConnected) {
-        cancelAnimationFrame(raf); stopTour(); ro.disconnect(); window.removeEventListener('keydown', onKey);
+        cancelAnimationFrame(raf); sup.dispose(); stopTour(); ro.disconnect(); window.removeEventListener('keydown', onKey);
         document.removeEventListener('fullscreenchange', syncFs); document.removeEventListener('webkitfullscreenchange', syncFs);
         document.body.classList.remove('c3d-lock');
         if (document.fullscreenElement === root && document.exitFullscreen) document.exitFullscreen();
@@ -1744,7 +1810,9 @@ AFA.views = AFA.views || {};
       }
       raf = requestAnimationFrame(frame);
       const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
-      if (tour.on) {
+      if (sup.on) {
+        sup.update(dt);
+      } else if (tour.on) {
         tourCamera(dt);
       } else if (tween) {
         const k = Math.min(1, (performance.now() - tween.start) / tween.dur), e = ease(k);
@@ -1778,7 +1846,9 @@ AFA.views = AFA.views || {};
         if (!reduceMotion) pose(p, t);
       });
       // Supervisor Tour, then the walk home to the hub, otherwise the usual hub patrol
-      if (tour.on) {
+      if (sup.on) {
+        // Supervisor Mode: the user is Adrian (position set by sup.update)
+      } else if (tour.on) {
         supervisorStep(dt);
       } else if (hero.route) {
         if (followRoute(dt)) { hero.returning = false; hero.speed = 1.1; hero.pauseUntil = t + 3; hero.pauseAct = 'watch'; hero.stop = 3; }
@@ -1790,7 +1860,7 @@ AFA.views = AFA.views || {};
         hero.stop = (hero.stop + 1) % heroStops.length;
         hero.pauseUntil = t + rand(5, 8); hero.pauseAct = pick(['present', 'analyse', 'watch', 'present']);
       }
-      if (!reduceMotion) pose(hero, t);
+      if (!reduceMotion && !sup.on) pose(hero, t);
       if (!reduceMotion) {
         globeG.rotation.y = t * 0.15; gRing1.rotation.x = Math.PI / 2 + Math.sin(t * 0.4) * 0.4; gRing1.rotation.y = t * 0.3; gRing2.rotation.x = Math.PI / 2.6; gRing2.rotation.z = -t * 0.25;
         hubPanels.rotation.y = t * 0.04; heroRing.rotation.z = t;
@@ -1808,9 +1878,9 @@ AFA.views = AFA.views || {};
         animators.forEach(f => f(t, dt));
       }
       updateLod(t);
-      animated.forEach(a => { if (t >= a.next) { a.draw(a.g, a.w, a.h, t); a.tex.needsUpdate = true; a.next = t + a.every; } });
+      animated.forEach(a => { if (t >= a.next) { a.draw(a.g, a.w, a.h, t); a.tex.needsUpdate = true; a.next = t + a.every * texSlow; } });
       if (t - lastInfo > 1) { lastInfo = t; renderInfo(); }
-      controls.update();
+      if (!sup.on) controls.update();
       renderer.render(scene, camera);
       if (tour.on) placeStatus();
     }

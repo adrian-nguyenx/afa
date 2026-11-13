@@ -107,6 +107,18 @@ AFA.config = {
       corridorSpeed: 4.8,   // m/s on the long corridor legs
       inspectMs: 8000,      // time spent inspecting each division
     },
+    // Supervisor Mode: first-person exploration as Adrian (views/center3d-supervisor.js)
+    supervisorMode: {
+      eyeHeight: 2.05,      // m — Adrian's eye level (model scale 1.3)
+      walkSpeed: 4.0,       // m/s
+      runSpeed: 7.5,        // m/s (Shift / Run button / joystick pushed to the edge)
+      accel: 9,             // velocity damping rate (higher = snappier)
+      mouseSens: 0.0022,    // rad per pixel (pointer lock)
+      touchSens: 0.005,     // rad per pixel (swipe look)
+      interactRange: 3.4,   // m — people within this distance can be inspected
+      // Recommended route (a suggestion only): division ids from core/registry.js, '_hub' = back to the Intelligence Hub
+      route: ['market', 'macro', 'corporate', 'banking', '_hub'],
+    },
     // Main character of the HQ (signature face design lives in views/center3d.js → drawAdrianFace)
     hero: {
       name: 'Adrian',
