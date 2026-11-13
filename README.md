@@ -2,7 +2,7 @@
 
 **Financial & Economic Intelligence Center**: a hub that collects, tracks and classifies financial and economic information.
 
-> **Status: Phase 1–3 complete · next: Phase 4 (Go Live).**
+> **Status: Phase 1–4 complete · live at https://adrian-nguyenx.github.io/afa/ · next: Phase 5 (Investment Intelligence), after review.**
 > With the automation run, the site shows **real** news, prices, FX and deposit rates (badge **LIVE**); anything without a live source, or the whole site when no live data is reachable, falls back to **MOCK DATA**.
 
 ## Run it
@@ -183,6 +183,23 @@ cron (this computer: run.py --loop · Phase 4: GitHub Actions every 15 min)
 - **Status:** the topbar badge shows LIVE / STALE (data older than 6 h) / MOCK DATA; each desk's Agent Profile shows its automation status; the AI routing list marks which steps run now.
 - **GitHub Actions** (`.github/workflows/automation.yml`) is written but stays off until go-live (repository variable `AFA_AUTOMATION_ENABLED=true`).
 
+## Phase 4: Go Live
+
+- **Site:** https://adrian-nguyenx.github.io/afa/ (GitHub Pages, branch `main`, root). Repo: `adrian-nguyenx/afa` (public).
+- **No backend server:** GitHub Actions (`.github/workflows/automation.yml`) runs `automation/run.py --job due` every 15 min,
+  commits `data/live/` + `automation/state/`, and Pages republishes. The site falls back to mock data per piece if a file is missing.
+- **Switches:** repository variable `AFA_AUTOMATION_ENABLED=true` turns the schedule on (set it to anything else to pause).
+  Manual run: Actions → automation → Run workflow (job `due`, `all`, `digest`, …) or `gh workflow run automation -f job=all`.
+- **Secrets** (Settings → Secrets and variables → Actions), entered by the owner only: `GMAIL_USER`, `GMAIL_APP_PASSWORD`,
+  `NOTIFY_EMAIL_TO`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, optional `ANTHROPIC_API_KEY` (without it international stories are not translated or shown).
+  Values are never in the repo; `.env` is git-ignored. Run only one scheduler: stop `run.py --loop` on the PC while Actions is on.
+- **Redeploy after a local change:** `git pull` first (the automation commits every run), then commit and `git push`.
+- **Disclaimer:** sidebar footer: information only, not investment advice; VNDirect and Yahoo Finance prices are unofficial public
+  endpoints used at low frequency (switch off per source in `automation/config.json`). Agent names remain Marvel trademarks (see above).
+- **Links:** `SITE_URL` in `automation/common.py` adds the dashboard link to Email and Telegram. `404.html` redirects to the home page.
+- **Custom domain (optional, later):** add a `CNAME` file with the domain, set the DNS record, then Settings → Pages → Custom domain.
+- **Limits:** scheduled runs can start a few minutes late; Pages may cache files for up to ~10 min.
+
 ## Architecture
 
 ```
@@ -201,7 +218,8 @@ assets/js/views/                 dashboard, news, division, desk, coming soon, s
 assets/js/app.js                 Bootstrap (picks live or mock provider, polling refresh)
 automation/                      Phase 3 backend (Python stdlib): run.py, news, market, translate, notify, telegram_bot
 data/live/                       JSON written by the automation, read by the site
-.github/workflows/automation.yml Scheduled run for Phase 4 (off until enabled)
+.github/workflows/automation.yml Scheduled run every 15 min (on: AFA_AUTOMATION_ENABLED=true)
+404.html                         Redirects unknown paths to the home page
 ```
 
 The data flows **Registry → Router → View → Components → `AFA.data` (Provider) → Services**.
@@ -256,7 +274,7 @@ The Claude API is billed separately from a Claude Pro plan.
 1. Phase 1: Intelligence Center (web, mock data). *Completed.*
 2. Phase 2: 3D Financial Intelligence Center. *Completed.*
 3. Phase 3: Automation & Intelligence Distribution (Email/Telegram). *Completed.*
-4. Phase 4: Go Live.
+4. Phase 4: Go Live. *Completed (awaiting review).*
 5. Phase 5: Investment Intelligence.
 
 Each phase starts only after the previous one has been reviewed and confirmed.

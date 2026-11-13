@@ -17,8 +17,9 @@ news by division and desk, write static JSON for the site (`data/live/`), and se
 4. Send for real: `python automation/run.py --job all`, then `python automation/run.py --job digest`.
 5. Keep it running on this computer: `python automation/run.py --loop` (checks every minute, runs what is due).
 
-In Phase 4 the same command runs every 15 minutes in GitHub Actions (`.github/workflows/automation.yml`), which
-stays off until the repository variable `AFA_AUTOMATION_ENABLED` is `true`.
+Since Phase 4 the same command runs every 15 minutes in GitHub Actions (`.github/workflows/automation.yml`) for the
+live site, switched on by the repository variable `AFA_AUTOMATION_ENABLED=true`, with the secrets stored as GitHub
+Actions Secrets. Use either Actions or `--loop` on this computer, not both, or messages are sent twice.
 
 ## Jobs
 
