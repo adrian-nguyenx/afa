@@ -1,5 +1,10 @@
 {
   "desks": {
+    "vn-macro": {
+      "total": 138,
+      "last24h": 71,
+      "lastItemAt": "2026-11-13T23:00:00Z"
+    },
     "commodities": {
       "total": 24,
       "last24h": 11,
@@ -12,23 +17,18 @@
     },
     "vn-equities": {
       "total": 78,
-      "last24h": 37,
+      "last24h": 34,
       "lastItemAt": "2026-11-13T17:04:00Z"
     },
     "vn-corporate": {
       "total": 127,
-      "last24h": 55,
+      "last24h": 54,
       "lastItemAt": "2026-11-13T17:03:00Z"
     },
     "fx": {
       "total": 2,
       "last24h": 2,
       "lastItemAt": "2026-11-13T15:36:00Z"
-    },
-    "vn-macro": {
-      "total": 135,
-      "last24h": 70,
-      "lastItemAt": "2026-11-13T14:42:57Z"
     },
     "global-corporate": {
       "total": 17,
@@ -46,7 +46,7 @@
       "lastItemAt": "2026-11-11T22:00:00Z"
     }
   },
-  "generatedAt": "2026-11-13T22:17:46Z",
+  "generatedAt": "2026-11-13T23:09:40Z",
   "mode": "live",
   "sources": {
     "vnexpress-kd": {
@@ -54,56 +54,56 @@
       "ok": true,
       "items": 60,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "cafef-ck": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "cafef-nh": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "cafef-vm": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "cafef-dn": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "vietstock-cp": {
       "name": "Vietstock",
       "ok": true,
       "items": 20,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "tuoitre-kd": {
       "name": "Tuổi Trẻ",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "thanhnien-kt": {
       "name": "Thanh Niên",
       "ok": true,
       "items": 50,
-      "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "new": 3,
+      "at": "2026-11-13T23:09:02Z"
     },
     "vneconomy-ck": {
       "name": "VnEconomy",
@@ -114,56 +114,56 @@
       "name": "CNBC",
       "ok": true,
       "items": 30,
-      "new": 2,
-      "at": "2026-11-13T22:17:31Z"
+      "new": 0,
+      "at": "2026-11-13T23:09:02Z"
     },
     "cnbc-econ": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "cnbc-earn": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "marketwatch-top": {
       "name": "MarketWatch",
       "ok": true,
       "items": 10,
-      "new": 2,
-      "at": "2026-11-13T22:17:31Z"
+      "new": 0,
+      "at": "2026-11-13T23:09:02Z"
     },
     "fed-monetary": {
       "name": "Federal Reserve",
       "ok": true,
       "items": 15,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     },
     "ecb-press": {
       "name": "ECB",
       "ok": true,
       "items": 15,
       "new": 0,
-      "at": "2026-11-13T22:17:31Z"
+      "at": "2026-11-13T23:09:02Z"
     }
   },
   "jobs": {
     "news": {
-      "lastRun": "2026-11-13T22:17:31Z",
+      "lastRun": "2026-11-13T23:09:02Z",
       "ok": true,
-      "newItems": 4,
-      "stored": 575
+      "newItems": 3,
+      "stored": 578
     },
     "market": {
-      "lastRun": "2026-11-13T22:17:45Z",
+      "lastRun": "2026-11-13T23:09:18Z",
       "ok": true,
-      "fetched": 9,
+      "fetched": 33,
       "live": [
         "AAPL",
         "ACB",
@@ -224,7 +224,7 @@
       "errors": []
     },
     "alerts": {
-      "lastRun": "2026-11-13T22:17:46Z",
+      "lastRun": "2026-11-13T23:09:40Z",
       "candidates": 0,
       "skipped": "quiet hours"
     },
@@ -233,7 +233,7 @@
       "slot": "On-demand"
     },
     "telegram": {
-      "lastRun": "2026-11-13T22:17:46Z",
+      "lastRun": "2026-11-13T23:09:40Z",
       "ok": true,
       "commands": 0
     }
