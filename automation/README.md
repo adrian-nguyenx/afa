@@ -30,7 +30,7 @@ Actions Secrets. Use either Actions or `--loop` on this computer, not both, or m
 | `market` | Prices: VNDirect (VN indices and stocks), Yahoo Finance (US, FX crosses, commodities), Vietcombank (VND rates). Trading hours only, plus a refresh every 3 h | 0 |
 | `rates` | Deposit rates from Vietcombank and BIDV public rate APIs; detects changes | 0 |
 | `alerts` | High-importance news, price moves over thresholds, rate changes over N bps → instant alert (quiet hours, mute) | 0 |
-| `digest` | Rule-based digest per division and desk + market snapshot + deposit rates, at the times in `notify-config.json` | 0 |
+| `digest` | Rule-based digest per division and desk + market snapshot + deposit rates, at the times in `notify-config.json` (07:00 / 17:00 / 22:00 Vietnam time); each covers the news since the previous slot | 0 |
 | `telegram` | Reads bot commands (`/status /latest /digest /mute /unmute /threshold /importance /desks`) from your chat id only | 0 |
 
 ## Files

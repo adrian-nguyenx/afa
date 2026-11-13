@@ -82,11 +82,16 @@ def load_live():
     return news, quotes, rates
 
 
-def build_digest(prefs, ch, now, slot_label, style=None):
-    """Return (subject, text, email (html, images), [telegram messages]) for one channel."""
+def build_digest(prefs, ch, now, slot_label, style=None, since=None):
+    """Return (subject, text, email (html, images), [telegram messages]) for one channel.
+
+    `since`: start of the window. Scheduled digests pass the previous slot (news since the last digest);
+    on-demand digests (job=digest, Telegram /digest) look back `digest.lookbackHours`."""
     news, quotes, rates = load_live()
     d = prefs.get('digest', {})
-    since = now - timedelta(hours=d.get('lookbackHours', 14))
+    if since is None:
+        since = now - timedelta(hours=d.get('lookbackHours', 14))
+    hours = max(1, round((now - since).total_seconds() / 3600))
     min_imp = prefs['channels'][ch].get('minImportance', 1)
     items = [n for n in news if (parse_iso(n['publishedAt']) or now) >= since and passes(n, prefs, min_imp)]
     per = d.get('maxItemsPerDesk', 5)
@@ -112,7 +117,7 @@ def build_digest(prefs, ch, now, slot_label, style=None):
     total = sum(len(r) for _, ds in sections for _, r in ds)
 
     # plain text
-    t = [subject, f'{total} stories in the last {d.get("lookbackHours", 14)}h', '']
+    t = [subject, f'{total} stories in the last {hours}h', '']
     for div_name, desks in sections:
         t.append(f'== {div_name} ==')
         for dep_name, rows in desks:
@@ -134,7 +139,7 @@ def build_digest(prefs, ch, now, slot_label, style=None):
 
     # email html: AI Financial Intelligence Center layout (email_digest.py), inline logo/avatars
     email_html = email_digest.render(prefs, now, slot_label, rich, mk, live_banks, rc, quotes, total,
-                                     d.get('lookbackHours', 14), style or d.get('style', 'cinematic'))
+                                     hours, style or d.get('style', 'cinematic'))
 
     # telegram: opening brief (markets) + one Brief Card message per division (telegram_format.py)
     tg = [telegram_format.opening_message(prefs, now, slot_label, total, len(rich), mk)]
@@ -287,11 +292,12 @@ def deliver(kind, ch, subject, text, html_body, tg_html, now):
 
 # ---------- jobs ----------
 
-def run_digest(prefs, slot_label):
+def run_digest(prefs, slot_label, since=None):
+    """Scheduled digests are not held by quiet hours or /mute (those only hold instant alerts)."""
     now = now_utc()
     for ch, cfg in prefs.get('channels', {}).items():
         if cfg.get('enabled') and cfg.get('digest'):
-            subject, text, h, tg = build_digest(prefs, ch, now, slot_label)
+            subject, text, h, tg = build_digest(prefs, ch, now, slot_label, since=since)
             deliver('digest', ch, subject, text, h, tg, now)
     update_status('jobs', 'digest', {'lastRun': iso(now), 'slot': slot_label})
 

@@ -6,7 +6,8 @@
 #   GMAIL_USER, GMAIL_APP_PASSWORD, NOTIFY_EMAIL_TO, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ANTHROPIC_API_KEY (optional)
 #
 # The job runs `run.py --job due` every 15 minutes; run.py decides which jobs are due from
-# automation/notify-config.json, then commits data/live (read by the site) and automation/state.
+# automation/notify-config.json (digests 07:00 / 17:00 / 22:00 Vietnam time = 00:00 / 10:00 / 15:00 UTC, all on the
+# */15 grid; a run delayed by up to 3 h still sends that slot once), then commits data/live (read by the site) and automation/state.
 # Note: GitHub may start scheduled runs a few minutes late, and pauses schedules after 60 days without commits.
 
 name: automation

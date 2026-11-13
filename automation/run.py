@@ -43,13 +43,22 @@ def due_jobs(prefs, sched, now):
             break
     jobs += ['translate', 'alerts', 'telegram']
     last_digest = parse_iso(sched.get('digest', '') or '')
-    for t in prefs.get('digest', {}).get('times', []):
+    times = sorted(prefs.get('digest', {}).get('times', []), key=hm)
+    for i, t in enumerate(times):
         h, m = hm(t)
         slot = loc.replace(hour=h, minute=m, second=0, microsecond=0)
         if slot <= loc < slot + timedelta(hours=3) and (not last_digest or last_digest < slot):
-            jobs.append(('digest', 'Morning' if h < 12 else 'Evening'))
+            # each digest covers the news since the previous slot (the last slot of yesterday for the first one)
+            ph, pm = hm(times[i - 1])
+            prev = slot.replace(hour=ph, minute=pm) - (timedelta(days=1) if i == 0 else timedelta(0))
+            jobs.append(('digest', slot_name(h), prev))
             break
     return jobs
+
+
+def slot_name(hour):
+    """Digest edition by Vietnam-time hour: Morning before 12:00, Afternoon before 18:00, then Evening."""
+    return 'Morning' if hour < 12 else 'Afternoon' if hour < 18 else 'Evening'
 
 
 def run_jobs(jobs, force_market=False):
@@ -78,7 +87,10 @@ def run_jobs(jobs, force_market=False):
             elif name == 'alerts':
                 notify.run_alerts(prefs, rate_changes)
             elif name == 'digest':
-                notify.run_digest(prefs, job[1] if isinstance(job, tuple) else 'On-demand')
+                if isinstance(job, tuple):
+                    notify.run_digest(prefs, job[1], since=job[2])
+                else:
+                    notify.run_digest(prefs, 'On-demand')
             elif name == 'telegram':
                 telegram_bot.run()
             sched[name] = iso(now)

@@ -27,7 +27,7 @@ AFA.views = AFA.views || {};
       email: { enabled: true, digest: true, instant: true, minImportance: 1 },
       telegram: { enabled: true, digest: true, instant: true, minImportance: 2 },
     },
-    digest: { times: ['07:30', '17:00'], style: 'cinematic', maxItemsPerDesk: 5, lookbackHours: 14, includeMarkets: true, includeRates: true },
+    digest: { times: ['07:00', '17:00', '22:00'], style: 'cinematic', maxItemsPerDesk: 5, lookbackHours: 14, includeMarkets: true, includeRates: true },
     instant: { enabled: true, minImportance: 3, maxPerRun: 5, news: true, prices: true, rates: true },
     quietHours: { enabled: true, start: '22:30', end: '06:30' },
     filters: { divisions: ['corporate', 'macro', 'market', 'banking'], departments: [], categories: [] },
@@ -83,7 +83,7 @@ AFA.views = AFA.views || {};
     `<option value="${esc(val)}" ${String(val) === String(v) ? 'selected' : ''}>${esc(lab)}</option>`).join('')}</select>`;
   const num = (path, v, step = 1, min = 0, unit = '') => `<span class="set-num"><input type="number" data-path="${path}" data-type="float" value="${esc(v)}" step="${step}" min="${min}">${unit ? `<i>${esc(unit)}</i>` : ''}</span>`;
   const time = (path, v) => `<input type="time" data-path="${path}" data-type="time" value="${esc(v)}">`;
-  const times = (path, v) => `<input type="text" data-path="${path}" data-type="times" value="${esc((v || []).join(', '))}" placeholder="07:30, 17:00">`;
+  const times = (path, v) => `<input type="text" data-path="${path}" data-type="times" value="${esc((v || []).join(', '))}" placeholder="07:00, 17:00, 22:00">`;
   const fld = (label, ctl, hint) => `<div class="set-fld"><label>${esc(label)}</label>${ctl}${hint ? `<small>${esc(hint)}</small>` : ''}</div>`;
   const section = (id, n, title, desc, body) => `<section class="set-sec panel" id="set-${id}">
       <header class="set-sec-head"><span class="set-n">${n}</span><div><h2>${esc(title)}</h2><p>${esc(desc)}</p></div></header>
@@ -135,8 +135,8 @@ AFA.views = AFA.views || {};
 
       section('digest', 2, 'Digests', 'Scheduled summaries of the stories collected since the previous digest, grouped by division.',
         `<div class="set-grid">
-          ${fld('Send at (Vietnam time)', times('digest.times', c.digest.times), 'HH:MM, comma-separated, e.g. 07:30, 17:00')}
-          ${fld('Look-back window', num('digest.lookbackHours', c.digest.lookbackHours, 1, 1, 'hours'), 'How far back each digest reaches')}
+          ${fld('Send at (Vietnam time)', times('digest.times', c.digest.times), 'HH:MM, comma-separated, e.g. 07:00, 17:00, 22:00')}
+          ${fld('Look-back window', num('digest.lookbackHours', c.digest.lookbackHours, 1, 1, 'hours'), 'Scheduled digests cover the news since the previous slot; this window is for on-demand digests (/digest)')}
           ${fld('Stories per desk', num('digest.maxItemsPerDesk', c.digest.maxItemsPerDesk, 1, 1, 'max'), 'Most important first; email shows up to 3')}
           ${fld('Email design', sel('digest.style', STYLES, c.digest.style || 'cinematic', 'str'), 'Telegram always uses the Brief Card format')}
         </div>
@@ -154,7 +154,7 @@ AFA.views = AFA.views || {};
           ${fld('Max stories per alert', num('instant.maxPerRun', c.instant.maxPerRun, 1, 1, 'stories'), 'Caps one alert burst')}
         </div>
         <div class="set-sub">Quiet hours</div>
-        <div class="set-quiet">${sw('quietHours.enabled', 'Hold alerts at night', c.quietHours.enabled, 'Digests still cover what happened')}
+        <div class="set-quiet">${sw('quietHours.enabled', 'Hold alerts at night', c.quietHours.enabled, 'Instant alerts only: scheduled digests are always sent')}
           <span class="set-range">${time('quietHours.start', c.quietHours.start)}<i>→</i>${time('quietHours.end', c.quietHours.end)}</span></div>`),
 
       section('thresholds', 4, 'Thresholds', 'When a price move or a rate change is big enough to trigger an instant alert.',
