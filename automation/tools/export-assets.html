@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- Exports the site's own agent avatars (components/avatars.js) and logo (assets/img/logo.svg) as PNG data
+     for the email digest. Nothing is redrawn: avatars come from AFA.ui.agentAvatar, the logo from the SVG file.
+     Used by automation/tools/export_assets.py through a headless browser (needs the site served over http). -->
+<meta charset="utf-8">
+<title>AFA asset export</title>
+<pre id="out">pending</pre>
+<script src="../../assets/js/core/config.js"></script>
+<script src="../../assets/js/core/utils.js"></script>
+<script src="../../assets/js/core/registry.js"></script>
+<script src="../../assets/js/components/avatars.js"></script>
+<script>
+(async function () {
+  const out = { avatars: {}, logo: null };
+  function scaled(img, w, h) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const g = c.getContext('2d'); g.imageSmoothingQuality = 'high';
+    g.drawImage(img, 0, 0, w, h);
+    return c.toDataURL('image/png');
+  }
+  const load = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  for (const d of AFA.registry.divisions) {
+    for (const p of d.departments) {
+      if (!p.agent) continue;
+      const tag = AFA.ui.agentAvatar(p, 'md');
+      const m = tag.match(/src="([^"]+)"/);
+      if (!m) continue;
+      out.avatars[p.id] = scaled(await load(m[1]), 200, 240);  // 300×360 original → 2× of the largest (100×120) email size
+    }
+  }
+  out.logo = scaled(await load('../../assets/img/logo.svg'), 128, 128);  // 2× of 64 px
+  const sink = new URLSearchParams(location.search).get('sink');  // e.g. http://127.0.0.1:8090/save
+  if (sink) {
+    const r = await fetch(sink, { method: 'POST', body: JSON.stringify(out) });
+    document.getElementById('out').textContent = r.ok ? 'SAVED ' + Object.keys(out.avatars).length + ' avatars + logo' : 'ERROR sink ' + r.status;
+  } else {
+    document.getElementById('out').textContent = JSON.stringify(out);
+  }
+})().catch(e => { document.getElementById('out').textContent = 'ERROR ' + e; });
+</script>

@@ -1,0 +1,92 @@
+{
+  "_comment": "Rule-based classification (0 tokens). Keywords are matched case-insensitively as whole words/phrases in headline (weight 2) and summary (weight 1). departmentId keys must match assets/js/core/registry.js.",
+  "departments": {
+    "vn-corporate": { "divisionId": "corporate", "kw": ["doanh nghiệp", "lợi nhuận", "doanh thu", "cổ đông", "đại hội đồng cổ đông", "đhđcđ", "hđqt", "chủ tịch", "tổng giám đốc", "cổ tức", "báo lãi", "lãi ròng", "lãi trước thuế", "thua lỗ", "báo lỗ", "phát hành", "thâu tóm", "sáp nhập", "m&a", "tập đoàn", "ctcp", "công ty", "vingroup", "vinamilk", "hòa phát", "fpt", "masan", "thế giới di động", "viettel", "petrolimex", "novaland", "vinfast"] },
+    "global-corporate": { "divisionId": "corporate", "kw": ["earnings", "quarterly results", "revenue", "profit", "acquisition", "acquire", "merger", "takeover", "ceo", "layoffs", "ipo", "guidance", "buyback", "apple", "nvidia", "microsoft", "tesla", "amazon", "alphabet", "google", "meta", "samsung", "tsmc", "boeing", "intel", "openai", "berkshire"] },
+    "vn-macro": { "divisionId": "macro", "kw": ["gdp", "cpi", "lạm phát", "xuất khẩu", "nhập khẩu", "xuất nhập khẩu", "fdi", "đầu tư công", "giải ngân", "ngân sách", "thu ngân sách", "thuế", "quốc hội", "chính phủ", "thủ tướng", "bộ tài chính", "bộ kế hoạch", "tăng trưởng kinh tế", "cục thống kê", "tổng cục thống kê", "pmi", "thặng dư thương mại", "cán cân thương mại", "nghị định", "nghị quyết", "luật", "kinh tế vĩ mô", "vĩ mô"] },
+    "global-macro": { "divisionId": "macro", "kw": ["fed", "federal reserve", "fomc", "ecb", "european central bank", "boj", "bank of japan", "pboc", "central bank", "powell", "lagarde", "inflation", "jobs report", "payrolls", "unemployment", "recession", "tariff", "tariffs", "treasury", "gdp", "consumer prices", "monetary policy", "interest rates", "rate cut", "rate hike", "thuế quan", "ngân hàng trung ương", "kinh tế mỹ", "kinh tế trung quốc", "kinh tế toàn cầu"] },
+    "vn-equities": { "divisionId": "market", "kw": ["vn-index", "vnindex", "vn30", "chứng khoán", "cổ phiếu", "khối ngoại", "thanh khoản", "hose", "hnx", "upcom", "phiên giao dịch", "phiên sáng", "phiên chiều", "nhà đầu tư", "margin", "bluechip", "thị trường chứng khoán", "công ty chứng khoán", "etf", "nâng hạng"] },
+    "us-equities": { "divisionId": "market", "kw": ["s&p 500", "s&p", "nasdaq", "dow jones", "dow", "wall street", "phố wall", "stocks", "stock market", "futures", "shares", "rally", "sell-off", "selloff", "chứng khoán mỹ", "russell 2000"] },
+    "fx": { "divisionId": "market", "kw": ["tỷ giá", "usd/vnd", "đồng usd", "đô la", "ngoại tệ", "dxy", "đồng yên", "euro", "nhân dân tệ", "dollar", "currency", "currencies", "forex", "yen", "yuan", "exchange rate"] },
+    "commodities": { "divisionId": "market", "kw": ["giá vàng", "vàng miếng", "vàng sjc", "vàng nhẫn", "giá dầu", "giá xăng", "xăng dầu", "brent", "wti", "opec", "giá bạc", "giá đồng", "cà phê", "giá gạo", "hàng hóa", "gold", "silver", "oil", "crude", "copper", "commodities", "natural gas"] },
+    "bank-rates": { "divisionId": "banking", "kw": ["lãi suất huy động", "lãi suất cho vay", "lãi suất tiết kiệm", "lãi suất tiền gửi", "liên ngân hàng", "lãi suất điều hành", "tái cấp vốn", "omo", "tín phiếu", "biểu lãi suất", "gửi tiết kiệm", "lãi suất", "huy động vốn"] },
+    "vn-banks": { "divisionId": "banking", "kw": ["ngân hàng", "nhà băng", "vietcombank", "bidv", "vietinbank", "techcombank", "agribank", "mb bank", "mbbank", "acb", "vpbank", "sacombank", "hdbank", "tpbank", "vib", "shb", "lpbank", "msb", "seabank", "eximbank", "ocb", "nợ xấu", "tín dụng", "tăng trưởng tín dụng", "casa", "nhnn", "ngân hàng nhà nước", "room tín dụng", "basel"] }
+  },
+  "countries": {
+    "US": ["mỹ", "hoa kỳ", "fed", "phố wall", "wall street", "u.s.", "american", "washington", "s&p", "nasdaq", "dow"],
+    "CN": ["trung quốc", "china", "chinese", "beijing", "pboc", "bắc kinh"],
+    "JP": ["nhật bản", "japan", "japanese", "boj", "tokyo", "đồng yên", "yen"],
+    "EU": ["châu âu", "eurozone", "europe", "european", "ecb", "eu", "đức", "germany", "pháp", "france"],
+    "GB": ["anh quốc", "britain", "uk", "bank of england", "london"]
+  },
+  "sectors": {
+    "Banking": ["ngân hàng", "bank", "banks", "tín dụng", "nợ xấu", "lãi suất huy động", "lãi suất cho vay"],
+    "Real Estate": ["bất động sản", "nhà ở", "căn hộ", "dự án", "khu đô thị", "real estate", "housing", "mortgage"],
+    "Technology": ["công nghệ", "fpt", "chip", "bán dẫn", "trí tuệ nhân tạo", "technology", "tech", "nvidia", "apple", "microsoft", "semiconductor", "software"],
+    "Energy": ["dầu", "xăng", "điện", "năng lượng", "lng", "oil", "energy", "crude", "opec", "brent", "wti"],
+    "Consumer": ["bán lẻ", "tiêu dùng", "thực phẩm", "sữa", "retail", "consumer", "vinamilk", "thế giới di động"],
+    "Industrials": ["thép", "xây dựng", "hạ tầng", "sản xuất", "công nghiệp", "steel", "manufacturing", "industrial", "hòa phát"],
+    "Commodities": ["giá vàng", "vàng miếng", "giá bạc", "giá đồng", "cà phê", "gạo", "gold", "silver", "copper", "commodities"],
+    "FX": ["tỷ giá", "ngoại tệ", "đồng usd", "currency", "forex", "exchange rate"],
+    "Monetary Policy": ["lãi suất điều hành", "nhnn", "fed", "ecb", "boj", "central bank", "monetary policy", "fomc", "rate cut", "rate hike"],
+    "Fiscal Policy": ["ngân sách", "thuế", "quốc hội", "đầu tư công", "fiscal", "budget", "tax"],
+    "Inflation": ["lạm phát", "cpi", "inflation", "consumer prices"],
+    "Growth": ["gdp", "tăng trưởng kinh tế", "growth", "recession", "pmi"],
+    "Trade": ["xuất khẩu", "nhập khẩu", "thuế quan", "fdi", "tariff", "tariffs", "trade", "exports", "imports"],
+    "Equities": ["chứng khoán", "cổ phiếu", "vn-index", "stocks", "stock market", "shares", "s&p 500", "nasdaq"]
+  },
+  "departmentDefaults": {
+    "vn-corporate": { "sector": "Industrials", "category": "Corporate Event" },
+    "global-corporate": { "sector": "Technology", "category": "Corporate Event" },
+    "vn-macro": { "sector": "Growth", "category": "Economic Policy" },
+    "global-macro": { "sector": "Monetary Policy", "category": "Economic Policy" },
+    "vn-equities": { "sector": "Equities", "category": "Market Moves" },
+    "us-equities": { "sector": "Equities", "category": "Market Moves" },
+    "fx": { "sector": "FX", "category": "Exchange Rate" },
+    "commodities": { "sector": "Commodities", "category": "Commodities" },
+    "bank-rates": { "sector": "Banking", "category": "Interest Rates" },
+    "vn-banks": { "sector": "Banking", "category": "Banking" }
+  },
+  "categories": {
+    "Earnings": ["lợi nhuận", "báo lãi", "lãi ròng", "lãi trước thuế", "doanh thu", "kết quả kinh doanh", "báo lỗ", "earnings", "quarterly results", "profit", "revenue"],
+    "M&A": ["thâu tóm", "sáp nhập", "m&a", "mua lại", "chuyển nhượng vốn", "acquisition", "merger", "takeover", "acquire"],
+    "Dividend": ["cổ tức", "dividend", "buyback"],
+    "Leadership Change": ["bổ nhiệm", "từ nhiệm", "miễn nhiệm", "tân chủ tịch", "tổng giám đốc mới", "ceo", "resigns", "appointed"],
+    "Deposit Rates": ["lãi suất huy động", "lãi suất tiết kiệm", "lãi suất tiền gửi", "gửi tiết kiệm"],
+    "Lending Rates": ["lãi suất cho vay", "cho vay mua nhà", "lending rate"],
+    "Interbank Rates": ["liên ngân hàng", "interbank"],
+    "Interest Rates": ["lãi suất điều hành", "tái cấp vốn", "omo", "tín phiếu", "rate cut", "rate hike", "interest rates"],
+    "Credit Growth": ["tăng trưởng tín dụng", "room tín dụng", "credit growth"],
+    "Asset Quality": ["nợ xấu", "npl", "bad debt"],
+    "FED": ["fed", "federal reserve", "fomc", "powell"],
+    "ECB": ["ecb", "european central bank", "lagarde"],
+    "BOJ": ["boj", "bank of japan"],
+    "CPI": ["cpi", "lạm phát", "inflation", "consumer prices"],
+    "GDP": ["gdp", "tăng trưởng kinh tế"],
+    "Trade": ["xuất khẩu", "nhập khẩu", "thuế quan", "tariff", "tariffs", "exports"],
+    "Government": ["chính phủ", "thủ tướng", "nghị định", "quốc hội", "nghị quyết"],
+    "Foreign Flows": ["khối ngoại", "foreign investors", "foreign flows"],
+    "Gold": ["giá vàng", "vàng miếng", "vàng sjc", "vàng nhẫn", "gold"],
+    "Oil": ["giá dầu", "giá xăng", "xăng dầu", "brent", "wti", "opec", "crude", "oil"],
+    "Exchange Rate": ["tỷ giá", "usd/vnd", "ngoại tệ", "exchange rate", "dollar", "yen"],
+    "Market Moves": ["vn-index", "phiên giao dịch", "thanh khoản", "s&p 500", "nasdaq", "dow jones", "wall street", "rally", "sell-off", "stocks"],
+    "Investment": ["đầu tư", "dự án", "mở rộng", "khởi công", "investment", "expansion"],
+    "IPO / Listing": ["niêm yết", "ipo", "chào sàn", "listing"]
+  },
+  "importance": {
+    "high": ["nhnn", "lãi suất điều hành", "tái cấp vốn", "fed", "fomc", "ecb", "boj", "tăng lãi suất", "giảm lãi suất", "rate cut", "rate hike", "khẩn cấp", "phá sản", "vỡ nợ", "bán tháo", "lao dốc", "giảm sâu", "kỷ lục", "thuế quan", "tariff", "tariffs", "recession", "suy thoái", "nâng hạng", "gdp", "cpi", "lạm phát", "inflation", "default", "crash", "plunge", "record high"],
+    "medium": ["lợi nhuận", "doanh thu", "tỷ giá", "giá vàng", "giá dầu", "khối ngoại", "cổ tức", "thâu tóm", "sáp nhập", "m&a", "lãi suất", "tín dụng", "nợ xấu", "vn-index", "xuất khẩu", "fdi", "earnings", "acquisition", "merger", "s&p 500", "nasdaq", "dow jones", "treasury", "oil", "gold", "dollar", "ipo"],
+    "bigMovePct": 5
+  },
+  "symbols": {
+    "VNINDEX": ["vn-index", "vnindex"], "VN30": ["vn30"], "HNXINDEX": ["hnx-index"],
+    "VCB": ["vietcombank", "vcb"], "TCB": ["techcombank", "tcb"], "BID": ["bidv"], "CTG": ["vietinbank", "ctg"],
+    "MBB": ["mb bank", "mbbank", "mbb"], "ACB": ["acb"], "VPB": ["vpbank", "vpb"], "STB": ["sacombank", "stb"], "HDB": ["hdbank", "hdb"],
+    "FPT": ["fpt"], "HPG": ["hòa phát", "hpg"], "VIC": ["vingroup", "vic"], "VNM": ["vinamilk", "vnm"], "MWG": ["thế giới di động", "mwg"], "SSI": ["ssi"],
+    "SPX": ["s&p 500", "s&p"], "IXIC": ["nasdaq"], "DJI": ["dow jones", "dow"],
+    "AAPL": ["apple"], "MSFT": ["microsoft"], "NVDA": ["nvidia"], "AMZN": ["amazon"], "GOOGL": ["alphabet", "google"], "META": ["meta"], "TSLA": ["tesla"],
+    "USDVND": ["tỷ giá", "usd/vnd", "đồng usd"], "DXY": ["dxy", "dollar index"], "USDJPY": ["yen", "đồng yên"], "EURUSD": ["euro"],
+    "XAUUSD": ["giá vàng", "vàng miếng", "gold"], "XAGUSD": ["giá bạc", "silver"], "BRENT": ["brent", "giá dầu", "crude", "oil"], "WTI": ["wti"], "HG": ["copper", "giá đồng"],
+    "US10Y": ["treasury", "trái phiếu mỹ", "lợi suất trái phiếu"]
+  }
+}

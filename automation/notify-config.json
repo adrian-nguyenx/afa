@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "utcOffsetMinutes": 420,
+  "schedule": {
+    "newsEveryMin": 30,
+    "marketEveryMin": 15,
+    "marketHoursOnly": true,
+    "ratesTimes": ["08:30", "14:30"]
+  },
+  "channels": {
+    "email": { "enabled": true, "digest": true, "instant": true, "minImportance": 1 },
+    "telegram": { "enabled": true, "digest": true, "instant": true, "minImportance": 2 }
+  },
+  "digest": {
+    "times": ["07:30", "17:00"],
+    "style": "cinematic",
+    "maxItemsPerDesk": 5,
+    "lookbackHours": 14,
+    "includeMarkets": true,
+    "includeRates": true
+  },
+  "instant": {
+    "enabled": true,
+    "minImportance": 3,
+    "maxPerRun": 5,
+    "news": true,
+    "prices": true,
+    "rates": true
+  },
+  "quietHours": { "enabled": true, "start": "22:30", "end": "06:30" },
+  "filters": {
+    "divisions": ["corporate", "macro", "market", "banking"],
+    "departments": [],
+    "categories": []
+  },
+  "thresholds": {
+    "defaultPricePct": 0,
+    "prices": {
+      "VNINDEX": 1.5, "VN30": 1.5, "SPX": 1.5, "IXIC": 2, "DJI": 1.5,
+      "USDVND": 0.3, "DXY": 0.8, "XAUUSD": 1.5, "BRENT": 3, "WTI": 3
+    },
+    "rateBps": 20
+  }
+}

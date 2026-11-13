@@ -1,0 +1,254 @@
+{
+  "desks": {
+    "vn-macro": {
+      "total": 130,
+      "last24h": 67,
+      "lastItemAt": "2026-11-13T13:42:00Z"
+    },
+    "vn-banks": {
+      "total": 58,
+      "last24h": 22,
+      "lastItemAt": "2026-11-13T13:42:00Z"
+    },
+    "vn-equities": {
+      "total": 73,
+      "last24h": 39,
+      "lastItemAt": "2026-11-13T13:03:00Z"
+    },
+    "vn-corporate": {
+      "total": 122,
+      "last24h": 61,
+      "lastItemAt": "2026-11-13T13:00:00Z"
+    },
+    "commodities": {
+      "total": 23,
+      "last24h": 11,
+      "lastItemAt": "2026-11-13T10:05:00Z"
+    },
+    "global-corporate": {
+      "total": 17,
+      "last24h": 10,
+      "lastItemAt": "2026-11-13T09:11:35Z"
+    },
+    "bank-rates": {
+      "total": 2,
+      "last24h": 0,
+      "lastItemAt": "2026-11-12T13:32:44Z"
+    },
+    "global-macro": {
+      "total": 1,
+      "last24h": 0,
+      "lastItemAt": "2026-11-11T22:00:00Z"
+    }
+  },
+  "generatedAt": "2026-11-13T16:04:59Z",
+  "mode": "live",
+  "sources": {
+    "vnexpress-kd": {
+      "name": "VnExpress",
+      "ok": true,
+      "items": 60,
+      "new": 1,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cafef-ck": {
+      "name": "CafeF",
+      "ok": true,
+      "items": 50,
+      "new": 1,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cafef-nh": {
+      "name": "CafeF",
+      "ok": true,
+      "items": 50,
+      "new": 1,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cafef-vm": {
+      "name": "CafeF",
+      "ok": true,
+      "items": 50,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cafef-dn": {
+      "name": "CafeF",
+      "ok": true,
+      "items": 50,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "vietstock-cp": {
+      "name": "Vietstock",
+      "ok": true,
+      "items": 20,
+      "new": 1,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "tuoitre-kd": {
+      "name": "Tuổi Trẻ",
+      "ok": true,
+      "items": 50,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "thanhnien-kt": {
+      "name": "Thanh Niên",
+      "ok": true,
+      "items": 50,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "vneconomy-ck": {
+      "name": "VnEconomy",
+      "ok": null,
+      "note": "Disabled: the site sends an incomplete TLS certificate chain, so verified HTTPS fails."
+    },
+    "cnbc-top": {
+      "name": "CNBC",
+      "ok": true,
+      "items": 30,
+      "new": 6,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cnbc-econ": {
+      "name": "CNBC",
+      "ok": true,
+      "items": 30,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "cnbc-earn": {
+      "name": "CNBC",
+      "ok": true,
+      "items": 30,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "marketwatch-top": {
+      "name": "MarketWatch",
+      "ok": true,
+      "items": 10,
+      "new": 3,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "fed-monetary": {
+      "name": "Federal Reserve",
+      "ok": true,
+      "items": 15,
+      "new": 0,
+      "at": "2026-11-13T14:51:55Z"
+    },
+    "ecb-press": {
+      "name": "ECB",
+      "ok": false,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "at": "2026-11-13T14:51:55Z"
+    }
+  },
+  "jobs": {
+    "news": {
+      "lastRun": "2026-11-13T14:51:55Z",
+      "ok": true,
+      "newItems": 13,
+      "stored": 505
+    },
+    "market": {
+      "lastRun": "2026-11-13T14:52:03Z",
+      "ok": true,
+      "fetched": 45,
+      "live": [
+        "AAPL",
+        "ACB",
+        "AMZN",
+        "BID",
+        "BRENT",
+        "CNYVND",
+        "CTG",
+        "DJI",
+        "DXY",
+        "EURUSD",
+        "EURVND",
+        "FPT",
+        "GBPVND",
+        "GOOGL",
+        "HDB",
+        "HG",
+        "HNXINDEX",
+        "HPG",
+        "IXIC",
+        "JPYVND",
+        "MBB",
+        "META",
+        "MSFT",
+        "MWG",
+        "NG",
+        "NVDA",
+        "SPX",
+        "SSI",
+        "STB",
+        "TCB",
+        "TSLA",
+        "UPCOM",
+        "US10Y",
+        "USDJPY",
+        "USDVND",
+        "VCB",
+        "VIC",
+        "VIX",
+        "VN30",
+        "VNINDEX",
+        "VNM",
+        "VPB",
+        "WTI",
+        "XAGUSD",
+        "XAUUSD"
+      ],
+      "errors": []
+    },
+    "rates": {
+      "lastRun": "2026-11-13T09:41:25Z",
+      "ok": true,
+      "banks": [
+        "VCB",
+        "BIDV"
+      ],
+      "newChanges": 0,
+      "errors": []
+    },
+    "alerts": {
+      "lastRun": "2026-11-13T09:42:08Z",
+      "candidates": 3,
+      "skipped": "first run: existing items marked as seen"
+    },
+    "digest": {
+      "lastRun": "2026-11-13T16:04:59Z",
+      "slot": "On-demand"
+    }
+  },
+  "translate": {
+    "enabled": false,
+    "model": "claude-haiku-5-5",
+    "dailyCap": 30,
+    "today": 0,
+    "monthCostUsd": 0.0,
+    "monthlyBudgetUsd": 1.0,
+    "pending": false,
+    "reason": "ANTHROPIC_API_KEY not set: international stories are held back (headlines must be Vietnamese)"
+  },
+  "channels": {
+    "email": {
+      "configured": true,
+      "lastPreview": "2026-11-13T16:04:59Z",
+      "lastSent": "2026-11-13T14:59:17Z",
+      "lastKind": "digest"
+    },
+    "telegram": {
+      "configured": true,
+      "lastPreview": "2026-11-13T16:04:59Z",
+      "lastSent": "2026-11-13T15:13:13Z",
+      "lastKind": "digest"
+    }
+  }
+}

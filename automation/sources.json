@@ -1,0 +1,20 @@
+{
+  "_comment": "News sources. Only headline, a short summary and the link to the original article are stored. Fetched at most every 30 minutes with a generic User-Agent. Set enabled:false to stop a source.",
+  "sources": [
+    { "id": "vnexpress-kd", "name": "VnExpress", "url": "https://vnexpress.net/rss/kinh-doanh.rss", "lang": "vi", "country": "VN", "departmentId": "vn-corporate", "enabled": true },
+    { "id": "cafef-ck", "name": "CafeF", "url": "https://cafef.vn/thi-truong-chung-khoan.rss", "lang": "vi", "country": "VN", "departmentId": "vn-equities", "enabled": true },
+    { "id": "cafef-nh", "name": "CafeF", "url": "https://cafef.vn/tai-chinh-ngan-hang.rss", "lang": "vi", "country": "VN", "departmentId": "vn-banks", "enabled": true },
+    { "id": "cafef-vm", "name": "CafeF", "url": "https://cafef.vn/vi-mo-dau-tu.rss", "lang": "vi", "country": "VN", "departmentId": "vn-macro", "enabled": true },
+    { "id": "cafef-dn", "name": "CafeF", "url": "https://cafef.vn/doanh-nghiep.rss", "lang": "vi", "country": "VN", "departmentId": "vn-corporate", "enabled": true },
+    { "id": "vietstock-cp", "name": "Vietstock", "url": "https://vietstock.vn/830/chung-khoan/co-phieu.rss", "lang": "vi", "country": "VN", "departmentId": "vn-equities", "enabled": true },
+    { "id": "tuoitre-kd", "name": "Tuổi Trẻ", "url": "https://tuoitre.vn/rss/kinh-doanh.rss", "lang": "vi", "country": "VN", "departmentId": "vn-macro", "enabled": true },
+    { "id": "thanhnien-kt", "name": "Thanh Niên", "url": "https://thanhnien.vn/rss/kinh-te.rss", "lang": "vi", "country": "VN", "departmentId": "vn-macro", "enabled": true },
+    { "id": "vneconomy-ck", "name": "VnEconomy", "url": "https://vneconomy.vn/chung-khoan.rss", "lang": "vi", "country": "VN", "departmentId": "vn-equities", "enabled": false, "note": "Disabled: the site sends an incomplete TLS certificate chain, so verified HTTPS fails." },
+    { "id": "cnbc-top", "name": "CNBC", "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html", "lang": "en", "country": "US", "departmentId": "us-equities", "enabled": true },
+    { "id": "cnbc-econ", "name": "CNBC", "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html", "lang": "en", "country": "US", "departmentId": "global-macro", "enabled": true },
+    { "id": "cnbc-earn", "name": "CNBC", "url": "https://www.cnbc.com/id/15839135/device/rss/rss.html", "lang": "en", "country": "US", "departmentId": "global-corporate", "enabled": true },
+    { "id": "marketwatch-top", "name": "MarketWatch", "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories", "lang": "en", "country": "US", "departmentId": "us-equities", "enabled": true },
+    { "id": "fed-monetary", "name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "lang": "en", "country": "US", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1 },
+    { "id": "ecb-press", "name": "ECB", "url": "https://www.ecb.europa.eu/rss/press.html", "lang": "en", "country": "EU", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1, "note": "May fail on machines whose certificate store lacks the ECB intermediate certificate; errors are logged and the run continues." }
+  ]
+}

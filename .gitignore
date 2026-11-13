@@ -1,0 +1,18 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local previews of emails / Telegram messages (dry-run)
+automation/out/
+
+# Python
+__pycache__/
+*.pyc
+*.tmp
+
+# Local tooling / OS files
+.claude/
+*.log
+Thumbs.db
+.DS_Store

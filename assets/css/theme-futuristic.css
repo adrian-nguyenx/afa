@@ -1,0 +1,108 @@
+/* ==========================================================================
+   THEME: FUTURISTIC / DATA VISUALIZATION — <html data-style="futuristic">
+   Ghi đè design tokens + chi tiết hình khối lên styles.css.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   FUTURISTIC / DATA VISUALIZATION — nền không gian, kính mờ, neon, glow
+   --------------------------------------------------------------------------- */
+[data-style="futuristic"] {
+  --bg: #04050f; --bg-2: rgba(10, 14, 36, .72); --panel: rgba(14, 20, 48, .55); --panel-2: rgba(22, 30, 66, .55);
+  --line: rgba(120, 140, 255, .16); --line-2: rgba(120, 140, 255, .28);
+  --text: #e8ecff; --muted: #9aa5d6; --dim: #6670a3;
+  --accent: #00e5ff; --accent-2: #ff3ec9; --violet: #8b5cff;
+  --up: #3dffb5; --down: #ff4f8b; --flat: #a5aed8;
+  --imp-high: #ff4f8b; --imp-med: #ffc857; --imp-low: #6670a3;
+  --font: "Inter", "Segoe UI", system-ui, sans-serif;
+  --radius: 16px;
+  color-scheme: dark;
+}
+[data-style="futuristic"] body {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(139, 92, 255, .28), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(0, 229, 255, .16), transparent 60%),
+    radial-gradient(800px 500px at 50% 120%, rgba(255, 62, 201, .14), transparent 60%),
+    #04050f;
+  background-attachment: fixed;
+}
+[data-style="futuristic"] body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, .05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+[data-style="futuristic"] .topbar, [data-style="futuristic"] .ticker, [data-style="futuristic"] .sidebar {
+  background: rgba(6, 9, 26, .6); backdrop-filter: blur(16px) saturate(140%);
+}
+[data-style="futuristic"] .brand-mark:not(.brand-logo) {
+  border-radius: 12px; color: #04050f;
+  background: linear-gradient(135deg, var(--accent), var(--violet), var(--accent-2));
+  box-shadow: 0 0 18px rgba(0, 229, 255, .45);
+}
+[data-style="futuristic"] .data-mode { border-radius: 999px; box-shadow: 0 0 12px rgba(255, 200, 87, .2); }
+[data-style="futuristic"] .icon-btn { border-radius: 12px; background: var(--panel); }
+[data-style="futuristic"] .sidebar a { border-left: 0; border-radius: 12px; }
+[data-style="futuristic"] .sidebar a.active {
+  background: linear-gradient(90deg, rgba(0, 229, 255, .18), rgba(139, 92, 255, .08));
+  box-shadow: inset 0 0 0 1px rgba(0, 229, 255, .35), 0 0 16px rgba(0, 229, 255, .15);
+}
+[data-style="futuristic"] .agent-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 2px var(--accent); opacity: .6; } }
+[data-style="futuristic"] .kicker { color: var(--accent-2); }
+[data-style="futuristic"] .page-head h1 {
+  font-size: 32px; font-weight: 700; letter-spacing: -.02em;
+  background: linear-gradient(90deg, #fff, var(--accent) 55%, var(--violet));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+[data-style="futuristic"] .panel, [data-style="futuristic"] .kpi, [data-style="futuristic"] .dept-card, [data-style="futuristic"] .soon-hero {
+  background: var(--panel); backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 10px 40px rgba(0, 0, 0, .35);
+}
+[data-style="futuristic"] .panel-head { border-bottom-color: var(--line); }
+[data-style="futuristic"] .panel-head h2 { color: var(--accent); }
+[data-style="futuristic"] .kpi { overflow: hidden; }
+[data-style="futuristic"] .kpi::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent); opacity: .6;
+}
+[data-style="futuristic"] .kpi:hover, [data-style="futuristic"] .dept-card:hover {
+  border-color: rgba(0, 229, 255, .5); box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 32px rgba(0, 229, 255, .18);
+}
+[data-style="futuristic"] .kpi-price { font-size: 23px; text-shadow: 0 0 18px rgba(0, 229, 255, .25); }
+[data-style="futuristic"] .spark path, [data-style="futuristic"] .chart .chart-line { filter: drop-shadow(0 0 4px currentColor); }
+[data-style="futuristic"] .chart .dot { stroke: #04050f; filter: drop-shadow(0 0 6px currentColor); }
+[data-style="futuristic"] .chart .grid { stroke: rgba(120, 140, 255, .12); }
+[data-style="futuristic"] .chart .last-text { fill: #04050f; }
+[data-style="futuristic"] .seg { border-radius: 12px; background: rgba(6, 9, 26, .6); }
+[data-style="futuristic"] .seg button { border-radius: 9px; }
+[data-style="futuristic"] .seg button.on { background: linear-gradient(135deg, rgba(0, 229, 255, .25), rgba(139, 92, 255, .25)); color: #fff; box-shadow: inset 0 0 0 1px rgba(0, 229, 255, .45); }
+[data-style="futuristic"] .news-card { border-radius: 12px; background: rgba(10, 14, 36, .5); border-left-width: 1px; border-left-color: var(--line); position: relative; }
+[data-style="futuristic"] .news-card.imp-l-high { box-shadow: inset 3px 0 0 var(--imp-high), -4px 0 14px -6px var(--imp-high); }
+[data-style="futuristic"] .news-card.imp-l-med { box-shadow: inset 3px 0 0 var(--imp-med); }
+[data-style="futuristic"] .tag, [data-style="futuristic"] .chip, [data-style="futuristic"] .pct-pill { border-radius: 999px; }
+[data-style="futuristic"] .pct-pill.up { box-shadow: 0 0 10px -2px var(--up); }
+[data-style="futuristic"] .pct-pill.down { box-shadow: 0 0 10px -2px var(--down); }
+[data-style="futuristic"] .breaking {
+  border-radius: 16px; background: linear-gradient(90deg, rgba(255, 79, 139, .16), rgba(139, 92, 255, .1));
+  border-color: rgba(255, 79, 139, .4); backdrop-filter: blur(12px);
+}
+[data-style="futuristic"] .breaking-tag { border-radius: 999px; background: linear-gradient(90deg, var(--down), var(--accent-2)); }
+[data-style="futuristic"] .fld select, [data-style="futuristic"] .fld input, [data-style="futuristic"] .btn-ghost { border-radius: 12px; background: rgba(6, 9, 26, .6); }
+
+/* ---------- AI pipeline (agent panel) ---------- */
+.pipeline { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pipeline li { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; font-size: 12.5px; padding: 6px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); }
+.pipeline small { display: block; color: var(--dim); font-size: 11px; }
+.model-chip { font: 600 11px var(--mono); padding: 2px 8px; border-radius: 999px; white-space: nowrap; border: 1px solid currentColor; }
+.model-none { color: var(--muted); }
+.model-fast { color: var(--up); }
+.model-balanced { color: var(--accent); }
+.model-deep { color: var(--accent-2); }
+.pipeline-note { margin: 8px 0 0; font-size: 11.5px; color: var(--dim); }
+
+@media (max-width: 600px) {
+  [data-style="futuristic"] .page-head h1 { font-size: 23px; }
+}

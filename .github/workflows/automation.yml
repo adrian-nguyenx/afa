@@ -1,0 +1,63 @@
+# Adrian Financial Agents — Phase 3 automation (news, prices, bank rates, translation, Email/Telegram).
+# Written in Phase 3, switched on at go-live (Phase 4). It does nothing until the repository variable
+# AFA_AUTOMATION_ENABLED is set to "true" (Settings → Secrets and variables → Actions → Variables).
+#
+# Secrets (Settings → Secrets and variables → Actions → Secrets), all entered by the owner:
+#   GMAIL_USER, GMAIL_APP_PASSWORD, NOTIFY_EMAIL_TO, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ANTHROPIC_API_KEY (optional)
+#
+# The job runs `run.py --job due` every 15 minutes; run.py decides which jobs are due from
+# automation/notify-config.json, then commits data/live (read by the site) and automation/state.
+# Note: GitHub may start scheduled runs a few minutes late, and pauses schedules after 60 days without commits.
+
+name: automation
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Job to run (due, all, news, market, rates, translate, alerts, digest, telegram)'
+        default: 'due'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: automation
+  cancel-in-progress: false
+
+jobs:
+  run:
+    if: ${{ vars.AFA_AUTOMATION_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run automation
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          NOTIFY_EMAIL_TO: ${{ secrets.NOTIFY_EMAIL_TO }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python automation/run.py --job "${{ github.event.inputs.job || 'due' }}"
+
+      - name: Commit live data
+        run: |
+          git config user.name "afa-automation"
+          git config user.email "afa-automation@users.noreply.github.com"
+          git add data/live automation/state
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "automation: update live data [skip ci]"
+            git pull --rebase --autostash
+            git push
+          fi

@@ -1,0 +1,99 @@
+{
+  "_comment": "Backend settings for the Phase 3 automation. Preferences that users change (schedule, channels, filters, thresholds) live in notify-config.json. No secrets here: they come from environment variables (.env locally, GitHub Secrets in Phase 4).",
+  "userAgent": "Mozilla/5.0 (compatible; AFA-Reader/1.0; personal non-commercial research)",
+  "httpTimeoutSec": 20,
+  "news": {
+    "retentionDays": 7,
+    "storeMax": 1500,
+    "publishMax": 600,
+    "maxSummaryChars": 320,
+    "dedupeJaccard": 0.8,
+    "dedupeWindowHours": 48
+  },
+  "market": {
+    "enabled": true,
+    "_note": "Yahoo Finance chart and VNDirect dchart are unofficial public endpoints, used at low frequency for personal, non-commercial use only. Review before a public go-live. Set enabled:false on a source to stop it.",
+    "sources": {
+      "yahoo": { "enabled": true, "label": "Yahoo Finance (delayed)" },
+      "vndirect": { "enabled": true, "label": "VNDirect (delayed)" },
+      "vcb": { "enabled": true, "label": "Vietcombank exchange rates" }
+    },
+    "staleRefetchHours": 3,
+    "symbols": {
+      "VNINDEX": { "src": "vndirect", "id": "VNINDEX", "session": "vn" },
+      "VN30": { "src": "vndirect", "id": "VN30", "session": "vn" },
+      "HNXINDEX": { "src": "vndirect", "id": "HNX", "session": "vn" },
+      "UPCOM": { "src": "vndirect", "id": "UPCOM", "session": "vn" },
+      "VCB": { "src": "vndirect", "id": "VCB", "session": "vn", "scale": 1000 },
+      "TCB": { "src": "vndirect", "id": "TCB", "session": "vn", "scale": 1000 },
+      "BID": { "src": "vndirect", "id": "BID", "session": "vn", "scale": 1000 },
+      "CTG": { "src": "vndirect", "id": "CTG", "session": "vn", "scale": 1000 },
+      "MBB": { "src": "vndirect", "id": "MBB", "session": "vn", "scale": 1000 },
+      "ACB": { "src": "vndirect", "id": "ACB", "session": "vn", "scale": 1000 },
+      "VPB": { "src": "vndirect", "id": "VPB", "session": "vn", "scale": 1000 },
+      "STB": { "src": "vndirect", "id": "STB", "session": "vn", "scale": 1000 },
+      "HDB": { "src": "vndirect", "id": "HDB", "session": "vn", "scale": 1000 },
+      "FPT": { "src": "vndirect", "id": "FPT", "session": "vn", "scale": 1000 },
+      "HPG": { "src": "vndirect", "id": "HPG", "session": "vn", "scale": 1000 },
+      "VIC": { "src": "vndirect", "id": "VIC", "session": "vn", "scale": 1000 },
+      "VNM": { "src": "vndirect", "id": "VNM", "session": "vn", "scale": 1000 },
+      "MWG": { "src": "vndirect", "id": "MWG", "session": "vn", "scale": 1000 },
+      "SSI": { "src": "vndirect", "id": "SSI", "session": "vn", "scale": 1000 },
+      "SPX": { "src": "yahoo", "id": "^GSPC", "session": "us" },
+      "IXIC": { "src": "yahoo", "id": "^IXIC", "session": "us" },
+      "DJI": { "src": "yahoo", "id": "^DJI", "session": "us" },
+      "VIX": { "src": "yahoo", "id": "^VIX", "session": "us" },
+      "US10Y": { "src": "yahoo", "id": "^TNX", "session": "us" },
+      "DXY": { "src": "yahoo", "id": "DX-Y.NYB", "session": "24x5" },
+      "AAPL": { "src": "yahoo", "id": "AAPL", "session": "us" },
+      "MSFT": { "src": "yahoo", "id": "MSFT", "session": "us" },
+      "NVDA": { "src": "yahoo", "id": "NVDA", "session": "us" },
+      "AMZN": { "src": "yahoo", "id": "AMZN", "session": "us" },
+      "GOOGL": { "src": "yahoo", "id": "GOOGL", "session": "us" },
+      "META": { "src": "yahoo", "id": "META", "session": "us" },
+      "TSLA": { "src": "yahoo", "id": "TSLA", "session": "us" },
+      "EURUSD": { "src": "yahoo", "id": "EURUSD=X", "session": "24x5" },
+      "USDJPY": { "src": "yahoo", "id": "JPY=X", "session": "24x5" },
+      "XAUUSD": { "src": "yahoo", "id": "GC=F", "session": "24x5" },
+      "XAGUSD": { "src": "yahoo", "id": "SI=F", "session": "24x5" },
+      "WTI": { "src": "yahoo", "id": "CL=F", "session": "24x5" },
+      "BRENT": { "src": "yahoo", "id": "BZ=F", "session": "24x5" },
+      "NG": { "src": "yahoo", "id": "NG=F", "session": "24x5" },
+      "HG": { "src": "yahoo", "id": "HG=F", "session": "24x5" },
+      "USDVND": { "src": "vcb", "id": "USD", "session": "vn" },
+      "EURVND": { "src": "vcb", "id": "EUR", "session": "vn" },
+      "JPYVND": { "src": "vcb", "id": "JPY", "session": "vn" },
+      "CNYVND": { "src": "vcb", "id": "CNY", "session": "vn" },
+      "GBPVND": { "src": "vcb", "id": "GBP", "session": "vn" }
+    }
+  },
+  "bankRates": {
+    "enabled": true,
+    "_note": "Deposit rates parsed from each bank's own public rate API. Banks without a parser keep mock data on the site (labelled). Lending rates stay mock in Phase 3.",
+    "banks": {
+      "VCB": { "enabled": true, "parser": "vcb", "url": "https://www.vietcombank.com.vn/api/interestrates?accountType=Personal&lang=vi" },
+      "BIDV": { "enabled": true, "parser": "bidv", "url": "https://bidv.com.vn/ServicesBIDV/InterestDetailServlet" }
+    }
+  },
+  "ai": {
+    "_note": "Phase 3 runs rule-based (0 tokens). The only LLM step is translating important international headlines into Vietnamese with Claude Haiku 5.5 through the Message Batches API (-50%). It is skipped when ANTHROPIC_API_KEY is not set. Other tasks in AFA.config.ai stay disabled.",
+    "translate": {
+      "enabled": true,
+      "model": "claude-haiku-5-5",
+      "effort": "low",
+      "maxTokens": 300,
+      "dailyCap": 30,
+      "maxPerBatch": 15,
+      "minImportance": 2,
+      "maxAgeHours": 36,
+      "monthlyBudgetUsd": 1.0,
+      "priceInPerMTok": 0.10,
+      "priceOutPerMTok": 0.50,
+      "batchDiscount": 0.5,
+      "batchTimeoutHours": 24
+    },
+    "runtime": {
+      "classify": false, "score": false, "summarize": false, "digest": false, "impact": false, "extractFin": false, "rateParse": false
+    }
+  }
+}
