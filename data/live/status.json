@@ -2,12 +2,12 @@
   "desks": {
     "vn-macro": {
       "total": 218,
-      "last24h": 44,
+      "last24h": 43,
       "lastItemAt": "2026-11-15T11:10:00Z"
     },
     "vn-corporate": {
       "total": 179,
-      "last24h": 34,
+      "last24h": 32,
       "lastItemAt": "2026-11-15T11:06:00Z"
     },
     "vn-equities": {
@@ -41,64 +41,64 @@
       "lastItemAt": "2026-11-14T02:32:00Z"
     }
   },
-  "generatedAt": "2026-11-15T11:49:50Z",
+  "generatedAt": "2026-11-15T12:35:42Z",
   "mode": "live",
   "sources": {
     "vnexpress-kd": {
       "name": "VnExpress",
       "ok": true,
       "items": 60,
-      "new": 1,
-      "at": "2026-11-15T11:49:17Z"
+      "new": 0,
+      "at": "2026-11-15T12:35:32Z"
     },
     "cafef-ck": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "cafef-nh": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "cafef-vm": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 1,
-      "at": "2026-11-15T11:49:17Z"
+      "new": 0,
+      "at": "2026-11-15T12:35:32Z"
     },
     "cafef-dn": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "vietstock-cp": {
       "name": "Vietstock",
       "ok": true,
       "items": 20,
-      "new": 1,
-      "at": "2026-11-15T11:49:17Z"
+      "new": 0,
+      "at": "2026-11-15T12:35:32Z"
     },
     "tuoitre-kd": {
       "name": "Tuổi Trẻ",
       "ok": true,
       "items": 50,
-      "new": 1,
-      "at": "2026-11-15T11:49:17Z"
+      "new": 0,
+      "at": "2026-11-15T12:35:32Z"
     },
     "thanhnien-kt": {
       "name": "Thanh Niên",
       "ok": true,
       "items": 50,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "vneconomy-ck": {
       "name": "VnEconomy",
@@ -110,55 +110,55 @@
       "ok": true,
       "items": 30,
       "new": 1,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "cnbc-econ": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "cnbc-earn": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "marketwatch-top": {
       "name": "MarketWatch",
       "ok": true,
       "items": 10,
-      "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "new": 1,
+      "at": "2026-11-15T12:35:32Z"
     },
     "fed-monetary": {
       "name": "Federal Reserve",
       "ok": true,
       "items": 15,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     },
     "ecb-press": {
       "name": "ECB",
       "ok": true,
       "items": 15,
       "new": 0,
-      "at": "2026-11-15T11:49:17Z"
+      "at": "2026-11-15T12:35:32Z"
     }
   },
   "jobs": {
     "news": {
-      "lastRun": "2026-11-15T11:49:17Z",
+      "lastRun": "2026-11-15T12:35:32Z",
       "ok": true,
-      "newItems": 5,
-      "stored": 819
+      "newItems": 2,
+      "stored": 821
     },
     "market": {
-      "lastRun": "2026-11-15T11:49:31Z",
+      "lastRun": "2026-11-15T12:35:42Z",
       "ok": true,
-      "fetched": 24,
+      "fetched": 0,
       "live": [
         "AAPL",
         "ACB",
@@ -219,7 +219,7 @@
       "errors": []
     },
     "alerts": {
-      "lastRun": "2026-11-15T11:49:49Z",
+      "lastRun": "2026-11-15T12:35:42Z",
       "candidates": 0,
       "skipped": null
     },
@@ -228,7 +228,7 @@
       "slot": "Afternoon"
     },
     "telegram": {
-      "lastRun": "2026-11-15T11:49:49Z",
+      "lastRun": "2026-11-15T12:35:42Z",
       "ok": true,
       "commands": 0
     }
