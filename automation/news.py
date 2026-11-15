@@ -1,7 +1,7 @@
 """News job: collect RSS -> de-duplicate -> rule-based classification -> publish data/live/news.json.
 
-International (non-Vietnamese) items are stored with status 'pending-translation' and are only published
-after translate.py has produced a Vietnamese headline and summary.
+International (non-Vietnamese) items are stored with status 'pending-translation' and published in their original
+language; translate.py replaces the headline and summary with Vietnamese for the most important ones (daily cap).
 """
 import hashlib
 import html
@@ -273,7 +273,9 @@ PUBLIC_FIELDS = ('id', 'headline', 'summary', 'source', 'url', 'publishedAt', 'd
 
 
 def publishable(it):
-    return it.get('lang') == 'vi' or it.get('status') == 'translated'
+    # International stories are published in their original language while (or if never) translated:
+    # translation stays within the daily cap, so more sources add no token cost.
+    return True
 
 
 def publish(items):
@@ -286,6 +288,8 @@ def publish(items):
         if it.get('status') == 'translated':
             o['translated'] = True
             o['origLang'] = it['orig']['lang']
+        elif it.get('lang', 'vi') != 'vi':
+            o['lang'] = it['lang']
         out.append(o)
     write_json(LIVE / 'news.json', {'generatedAt': iso(now), 'count': len(out), 'items': out})
 

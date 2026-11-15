@@ -1,5 +1,5 @@
 {
-  "_comment": "News sources. Only headline, a short summary and the link to the original article are stored. Fetched at most every 30 minutes with a generic User-Agent. Set enabled:false to stop a source.",
+  "_comment": "News sources. International (lang en) items are published in their original language; only the most important ones get a Vietnamese translation within the daily cap in config.json. Only headline, a short summary and the link to the original article are stored. Fetched at most every 30 minutes with a generic User-Agent. Set enabled:false to stop a source.",
   "sources": [
     { "id": "vnexpress-kd", "name": "VnExpress", "url": "https://vnexpress.net/rss/kinh-doanh.rss", "lang": "vi", "country": "VN", "departmentId": "vn-corporate", "enabled": true },
     { "id": "cafef-ck", "name": "CafeF", "url": "https://cafef.vn/thi-truong-chung-khoan.rss", "lang": "vi", "country": "VN", "departmentId": "vn-equities", "enabled": true },
@@ -15,6 +15,20 @@
     { "id": "cnbc-earn", "name": "CNBC", "url": "https://www.cnbc.com/id/15839135/device/rss/rss.html", "lang": "en", "country": "US", "departmentId": "global-corporate", "enabled": true },
     { "id": "marketwatch-top", "name": "MarketWatch", "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories", "lang": "en", "country": "US", "departmentId": "us-equities", "enabled": true },
     { "id": "fed-monetary", "name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "lang": "en", "country": "US", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1 },
-    { "id": "ecb-press", "name": "ECB", "url": "https://www.ecb.europa.eu/rss/press.html", "lang": "en", "country": "EU", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1, "note": "May fail on machines whose certificate store lacks the ECB intermediate certificate; errors are logged and the run continues." }
+    { "id": "ecb-press", "name": "ECB", "url": "https://www.ecb.europa.eu/rss/press.html", "lang": "en", "country": "EU", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1, "note": "May fail on machines whose certificate store lacks the ECB intermediate certificate; errors are logged and the run continues." },
+    { "id": "wsj-markets", "name": "Wall Street Journal", "url": "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain", "lang": "en", "country": "US", "departmentId": "us-equities", "enabled": true },
+    { "id": "wsj-economy", "name": "Wall Street Journal", "url": "https://feeds.content.dowjones.io/public/rss/socialeconomyfeed", "lang": "en", "country": "US", "departmentId": "global-macro", "enabled": true },
+    { "id": "ft-markets", "name": "Financial Times", "url": "https://www.ft.com/markets?format=rss", "lang": "en", "country": "GLOBAL", "departmentId": "global-corporate", "enabled": true },
+    { "id": "ft-economy", "name": "Financial Times", "url": "https://www.ft.com/global-economy?format=rss", "lang": "en", "country": "GLOBAL", "departmentId": "global-macro", "enabled": true },
+    { "id": "economist-fe", "name": "The Economist", "url": "https://www.economist.com/finance-and-economics/rss.xml", "lang": "en", "country": "GLOBAL", "departmentId": "global-macro", "enabled": true },
+    { "id": "yahoo-spx", "name": "Yahoo Finance", "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US", "lang": "en", "country": "US", "departmentId": "us-equities", "enabled": true },
+    { "id": "nikkei-asia", "name": "Nikkei Asia", "url": "https://asia.nikkei.com/rss/feed/nar", "lang": "en", "country": "JP", "departmentId": "global-corporate", "enabled": true },
+    { "id": "scmp-business", "name": "South China Morning Post", "url": "https://www.scmp.com/rss/92/feed", "lang": "en", "country": "CN", "departmentId": "global-corporate", "enabled": true },
+    { "id": "cnbc-asia", "name": "CNBC", "url": "https://www.cnbc.com/id/19832390/device/rss/rss.html", "lang": "en", "country": "GLOBAL", "departmentId": "global-macro", "enabled": true },
+    { "id": "bbc-business", "name": "BBC", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "lang": "en", "country": "GB", "departmentId": "global-corporate", "enabled": true },
+    { "id": "guardian-business", "name": "The Guardian", "url": "https://www.theguardian.com/business/rss", "lang": "en", "country": "GB", "departmentId": "global-corporate", "enabled": true },
+    { "id": "guardian-economics", "name": "The Guardian", "url": "https://www.theguardian.com/business/economics/rss", "lang": "en", "country": "GB", "departmentId": "global-macro", "enabled": true },
+    { "id": "boe-news", "name": "Bank of England", "url": "https://www.bankofengland.co.uk/rss/news", "lang": "en", "country": "GB", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1 },
+    { "id": "boj-news", "name": "Bank of Japan", "url": "https://www.boj.or.jp/en/rss/whatsnew.xml", "lang": "en", "country": "JP", "departmentId": "global-macro", "enabled": true, "importanceBoost": 1 }
   ]
 }

@@ -183,10 +183,10 @@ cron (this computer: run.py --loop · Phase 4: GitHub Actions every 15 min)
 ```
 
 - **Sources:**
-  - News RSS: VnExpress, CafeF (4 feeds), Vietstock, Tuổi Trẻ, Thanh Niên, CNBC (3), MarketWatch, Federal Reserve, ECB.
+  - News RSS: VnExpress, CafeF (4 feeds), Vietstock, Tuổi Trẻ, Thanh Niên; international: CNBC (4), MarketWatch, Wall Street Journal (2), Financial Times (2), The Economist, Yahoo Finance, Nikkei Asia, South China Morning Post, BBC Business, The Guardian (2), Federal Reserve, ECB, Bank of England, Bank of Japan. Reuters/Bloomberg have no public RSS; IMF, World Bank and Investing.com block automated readers.
   - Prices: VNDirect (VN indices and stocks), Yahoo Finance (US, FX crosses, commodities, US10Y, DXY), Vietcombank (VND rates). Both price endpoints are unofficial, used at low frequency for personal use; review before a public go-live.
   - Deposit rates: Vietcombank and BIDV public rate APIs. Other banks, lending rates, policy rates, promotions and bank fundamentals stay mock (labelled).
-- **Classification** is rule-based (`automation/taxonomy.json`, 0 tokens). The only LLM step translates international stories into Vietnamese, so headlines stay Vietnamese; without `ANTHROPIC_API_KEY` those stories are held back.
+- **Classification** is rule-based (`automation/taxonomy.json`, 0 tokens). The only LLM step translates the most important international stories into Vietnamese within the daily cap (30/day); all other international stories are published in their original English, so adding sources adds no token cost.
 - **Distribution:** digests at 07:00 (Morning), 17:00 (Afternoon) and 22:00 (Evening), Vietnam time, each covering the news since the previous one (quiet hours never hold a digest); instant alerts for high-importance news, price moves over a threshold and deposit-rate changes ≥ 20 bps; quiet hours; Telegram commands `/status /latest /digest /mute /unmute /threshold /importance /desks`.
 - **Preferences** are edited at `#/settings`, saved as a browser draft and exported as `automation/notify-config.json`. It holds no personal data: addresses and tokens are secrets in `.env` (local, git-ignored) or GitHub Secrets.
 - **Status:** the topbar badge shows LIVE / STALE (data older than 6 h) / MOCK DATA; each desk's Agent Profile shows its automation status; the AI routing list marks which steps run now.

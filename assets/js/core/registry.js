@@ -209,7 +209,7 @@ window.AFA = window.AFA || {};
 
   const taxonomy = {
     countries: {
-      VN: 'Vietnam', US: 'United States', EU: 'Europe', JP: 'Japan', CN: 'China', GLOBAL: 'Global',
+      VN: 'Vietnam', US: 'United States', EU: 'Europe', JP: 'Japan', CN: 'China', GB: 'United Kingdom', GLOBAL: 'Global',
     },
     importance: {
       3: { label: 'High', key: 'high' },

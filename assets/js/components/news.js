@@ -22,8 +22,8 @@ AFA.ui = AFA.ui || {};
         <time datetime="${esc(n.publishedAt)}" title="${esc(U.fmtDateTime(n.publishedAt))}">${esc(U.timeAgo(n.publishedAt))}</time>
         ${AFA.ui.importanceBadge(n.importance)}
       </div>
-      <h3 class="news-title" lang="vi"><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.headline)}</a></h3>
-      ${opts.compact ? '' : `<p class="news-sum" lang="vi">${esc(n.summary)}</p>`}
+      <h3 class="news-title" lang="${esc(n.lang || 'vi')}"><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.headline)}</a></h3>
+      ${opts.compact ? '' : `<p class="news-sum" lang="${esc(n.lang || 'vi')}">${esc(n.summary)}</p>`}
       <div class="news-tags">
         ${dept ? `<a class="tag tag-dept" href="#/${esc(dept.divisionId)}/${esc(dept.id)}">${esc(dept.name.replace(/^Phòng /, ''))}</a>` : ''}
         <span class="tag">${esc(n.category)}</span>

@@ -5,7 +5,7 @@
   "news": {
     "retentionDays": 7,
     "storeMax": 1500,
-    "publishMax": 600,
+    "publishMax": 900,
     "maxSummaryChars": 320,
     "dedupeJaccard": 0.8,
     "dedupeWindowHours": 48
