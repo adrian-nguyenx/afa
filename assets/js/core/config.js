@@ -89,7 +89,7 @@ AFA.config = {
     // What actually runs in Phase 3 (mirrors automation/config.json). Steps not listed here are planned, not active.
     // classify/score/digest run as code (rule-based, 0 tokens) instead of an LLM for now.
     runtime: {
-      collect: 'live', dedupe: 'live', marketData: 'live', alerts: 'live', translate: 'live',
+      collect: 'live', dedupe: 'live', marketData: 'live', alerts: 'live',
       classify: 'rules', score: 'rules', digest: 'rules', rateParse: 'rules',
     },
     promptCaching: true,

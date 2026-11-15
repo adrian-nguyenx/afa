@@ -58,9 +58,9 @@ def run():
             'today': st['daily']['count'], 'monthCostUsd': round(st['month']['costUsd'], 4),
             'monthlyBudgetUsd': cfg['monthlyBudgetUsd'], 'pending': bool(st.get('pending'))}
     if not cfg.get('enabled'):
-        info['reason'] = 'disabled in automation/config.json'
+        info['reason'] = 'turned off: international stories are shown in original English (0 tokens)'
     elif not key:
-        info['reason'] = 'ANTHROPIC_API_KEY not set: international stories are held back (headlines must be Vietnamese)'
+        info['reason'] = 'ANTHROPIC_API_KEY not set: international stories are shown in original English'
     if not info['enabled']:
         update_status('translate', None, info)
         return 0

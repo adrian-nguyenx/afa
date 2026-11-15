@@ -25,8 +25,8 @@ AFA.ui = AFA.ui || {};
     }).join('');
     return `<ul class="pipeline">${steps}</ul>
       <p class="pipeline-note">Phase 3 automation: collection, de-duplication, prices and alerts run as code (0 tokens);
-        classification, scoring and digests are rule-based for now; the only LLM step is translating important
-        international stories into Vietnamese with Claude Haiku (Batch API, daily cap). Planned steps keep their model routing.</p>`;
+        classification, scoring and digests are rule-based; no LLM step runs (0 tokens). International stories are shown
+        in their original English. Planned steps keep their model routing.</p>`;
   };
 
   /** Desk automation status text from data/live/status.json (null in mock mode). */
@@ -40,7 +40,6 @@ AFA.ui = AFA.ui || {};
     if (p.features && p.features.includes('bankRates') && jobs.rates) parts.push(`rates ${U.timeAgo(jobs.rates.lastRun)}`);
     if (jobs.news) parts.push(`news run ${U.timeAgo(jobs.news.lastRun)}`);
     const intl = ['global-corporate', 'global-macro', 'us-equities', 'fx'].includes(p.id);
-    if (!d && intl && st.translate && !st.translate.enabled) parts.push('international stories wait for translation (no API key)');
     return { cls: AFA.data.label === 'STALE' ? 'warn' : 'ok', text: `${AFA.data.label === 'STALE' ? 'Stale' : 'Active'} · ${parts.join(' · ')}` };
   };
 

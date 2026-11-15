@@ -76,9 +76,9 @@
     }
   },
   "ai": {
-    "_note": "Phase 3 runs rule-based (0 tokens). The only LLM step is translating important international headlines into Vietnamese with Claude Haiku 5.5 through the Message Batches API (-50%). It is skipped when ANTHROPIC_API_KEY is not set. Other tasks in AFA.config.ai stay disabled.",
+    "_note": "Everything runs rule-based (0 tokens). Translation of international headlines (Claude Haiku 5.5, Batch API) is turned off at the user's request (2026-11-15): international stories are published in their original English. Set translate.enabled to true to turn it back on. Other tasks in AFA.config.ai stay disabled.",
     "translate": {
-      "enabled": true,
+      "enabled": false,
       "model": "claude-haiku-5-5",
       "effort": "low",
       "maxTokens": 300,

@@ -176,7 +176,7 @@ The site is static (GitHub Pages later), so the backend is a scheduled Python sc
 cron (this computer: run.py --loop · Phase 4: GitHub Actions every 15 min)
   automation/run.py --job due
     news: RSS → de-duplicate → rule-based classification by division/desk → importance
-    translate: important international stories → Vietnamese (Claude Haiku 5.5, Batch API, capped)
+    translate: turned off (international stories stay in original English, 0 tokens)
     market / rates: prices, FX, deposit rates → change detection
     alerts / digest / telegram: Email (Gmail SMTP) + Telegram
   → data/live/*.json  →  site (api-provider, falls back to mock piece by piece)
@@ -186,7 +186,7 @@ cron (this computer: run.py --loop · Phase 4: GitHub Actions every 15 min)
   - News RSS: VnExpress, CafeF (4 feeds), Vietstock, Tuổi Trẻ, Thanh Niên; international: CNBC (4), MarketWatch, Wall Street Journal (2), Financial Times (2), The Economist, Yahoo Finance, Nikkei Asia, South China Morning Post, BBC Business, The Guardian (2), Federal Reserve, ECB, Bank of England, Bank of Japan. Reuters/Bloomberg have no public RSS; IMF, World Bank and Investing.com block automated readers.
   - Prices: VNDirect (VN indices and stocks), Yahoo Finance (US, FX crosses, commodities, US10Y, DXY), Vietcombank (VND rates). Both price endpoints are unofficial, used at low frequency for personal use; review before a public go-live.
   - Deposit rates: Vietcombank and BIDV public rate APIs. Other banks, lending rates, policy rates, promotions and bank fundamentals stay mock (labelled).
-- **Classification** is rule-based (`automation/taxonomy.json`, 0 tokens). The only LLM step translates the most important international stories into Vietnamese within the daily cap (30/day); all other international stories are published in their original English, so adding sources adds no token cost.
+- **Classification** is rule-based (`automation/taxonomy.json`, 0 tokens). Automatic translation is turned off, so no LLM step runs (0 tokens): international stories are published in their original English. Stories translated earlier keep their Vietnamese text.
 - **Distribution:** digests at 07:00 (Morning), 17:00 (Afternoon) and 22:00 (Evening), Vietnam time, each covering the news since the previous one (quiet hours never hold a digest); instant alerts for high-importance news, price moves over a threshold and deposit-rate changes ≥ 20 bps; quiet hours; Telegram commands `/status /latest /digest /mute /unmute /threshold /importance /desks`.
 - **Preferences** are edited at `#/settings`, saved as a browser draft and exported as `automation/notify-config.json`. It holds no personal data: addresses and tokens are secrets in `.env` (local, git-ignored) or GitHub Secrets.
 - **Status:** the topbar badge shows LIVE / STALE (data older than 6 h) / MOCK DATA; each desk's Agent Profile shows its automation status; the AI routing list marks which steps run now.
@@ -200,7 +200,7 @@ cron (this computer: run.py --loop · Phase 4: GitHub Actions every 15 min)
 - **Switches:** repository variable `AFA_AUTOMATION_ENABLED=true` turns the schedule on (set it to anything else to pause).
   Manual run: Actions → automation → Run workflow (job `due`, `all`, `digest`, …) or `gh workflow run automation -f job=all`.
 - **Secrets** (Settings → Secrets and variables → Actions), entered by the owner only: `GMAIL_USER`, `GMAIL_APP_PASSWORD`,
-  `NOTIFY_EMAIL_TO`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, optional `ANTHROPIC_API_KEY` (without it international stories are not translated or shown).
+  `NOTIFY_EMAIL_TO`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, optional `ANTHROPIC_API_KEY` (unused while translation is off).
   Values are never in the repo; `.env` is git-ignored. Run only one scheduler: stop `run.py --loop` on the PC while Actions is on.
 - **Redeploy after a local change:** `git pull` first (the automation commits every run), then commit and `git push`.
 - **Disclaimer:** sidebar footer: information only, not investment advice; VNDirect and Yahoo Finance prices are unofficial public
@@ -269,7 +269,7 @@ The routing lives in `AFA.config.ai`. Each desk has an `aiProfile`, and the desk
 | Task | Model |
 |---|---|
 | Collect news, de-duplicate, price feeds, threshold alerts | No LLM (code only, 0 tokens) |
-| Translate international news into Vietnamese (live in Phase 3) | `claude-haiku-5-5`: low effort, Batch API, ≤300 tokens, 30 stories/day, $1/month cap |
+| Translate international news into Vietnamese (turned off; can be re-enabled in `automation/config.json`) | `claude-haiku-5-5`: low effort, Batch API, ≤300 tokens, 30 stories/day, $1/month cap |
 | Classify, score importance, summarise, extract financial metrics, parse rate sheets | `claude-haiku-5-5`: low/medium effort, Batch API (-50%), capped `max_tokens` |
 | Daily digest, impact analysis | `claude-sonnet-5-5`: medium effort |
 | Research & valuation (Phase 5) | `claude-opus-5-5`: only when deep analysis is needed |
