@@ -1,49 +1,49 @@
 {
   "desks": {
     "global-corporate": {
-      "total": 212,
-      "last24h": 134,
-      "lastItemAt": "2026-11-19T02:47:12Z"
+      "total": 209,
+      "last24h": 128,
+      "lastItemAt": "2026-11-19T03:47:53Z"
     },
     "us-equities": {
-      "total": 344,
-      "last24h": 227,
-      "lastItemAt": "2026-11-19T02:41:36Z"
-    },
-    "vn-banks": {
-      "total": 26,
-      "last24h": 20,
-      "lastItemAt": "2026-11-19T02:35:00Z"
-    },
-    "vn-macro": {
-      "total": 94,
-      "last24h": 70,
-      "lastItemAt": "2026-11-19T02:30:00Z"
-    },
-    "vn-corporate": {
-      "total": 93,
-      "last24h": 67,
-      "lastItemAt": "2026-11-19T02:21:00Z"
+      "total": 332,
+      "last24h": 225,
+      "lastItemAt": "2026-11-19T03:45:00Z"
     },
     "global-macro": {
       "total": 48,
-      "last24h": 40,
-      "lastItemAt": "2026-11-19T02:10:44Z"
+      "last24h": 41,
+      "lastItemAt": "2026-11-19T03:38:00Z"
+    },
+    "commodities": {
+      "total": 32,
+      "last24h": 23,
+      "lastItemAt": "2026-11-19T03:33:00Z"
+    },
+    "vn-equities": {
+      "total": 50,
+      "last24h": 33,
+      "lastItemAt": "2026-11-19T03:28:00Z"
+    },
+    "vn-macro": {
+      "total": 97,
+      "last24h": 70,
+      "lastItemAt": "2026-11-19T03:24:00Z"
+    },
+    "vn-banks": {
+      "total": 29,
+      "last24h": 23,
+      "lastItemAt": "2026-11-19T03:17:00Z"
+    },
+    "vn-corporate": {
+      "total": 95,
+      "last24h": 65,
+      "lastItemAt": "2026-11-19T03:12:00Z"
     },
     "bank-rates": {
       "total": 1,
       "last24h": 1,
       "lastItemAt": "2026-11-19T01:58:00Z"
-    },
-    "commodities": {
-      "total": 28,
-      "last24h": 21,
-      "lastItemAt": "2026-11-19T01:53:00Z"
-    },
-    "vn-equities": {
-      "total": 47,
-      "last24h": 31,
-      "lastItemAt": "2026-11-19T01:40:00Z"
     },
     "fx": {
       "total": 7,
@@ -51,64 +51,64 @@
       "lastItemAt": "2026-11-19T01:13:00Z"
     }
   },
-  "generatedAt": "2026-11-19T02:47:52Z",
+  "generatedAt": "2026-11-19T03:48:30Z",
   "mode": "live",
   "sources": {
     "vnexpress-kd": {
       "name": "VnExpress",
       "ok": true,
       "items": 60,
-      "new": 11,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 12,
+      "at": "2026-11-19T03:47:53Z"
     },
     "cafef-ck": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 0,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 4,
+      "at": "2026-11-19T03:47:53Z"
     },
     "cafef-nh": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 11,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "cafef-vm": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
       "new": 2,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "cafef-dn": {
       "name": "CafeF",
       "ok": true,
       "items": 50,
-      "new": 4,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 2,
+      "at": "2026-11-19T03:47:53Z"
     },
     "vietstock-cp": {
       "name": "Vietstock",
       "ok": true,
       "items": 20,
-      "new": 0,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 1,
+      "at": "2026-11-19T03:47:53Z"
     },
     "tuoitre-kd": {
       "name": "Tuổi Trẻ",
       "ok": true,
       "items": 50,
-      "new": 4,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 1,
+      "at": "2026-11-19T03:47:53Z"
     },
     "thanhnien-kt": {
       "name": "Thanh Niên",
       "ok": true,
       "items": 50,
-      "new": 2,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 3,
+      "at": "2026-11-19T03:47:53Z"
     },
     "vneconomy-ck": {
       "name": "VnEconomy",
@@ -120,153 +120,153 @@
       "ok": true,
       "items": 30,
       "new": 1,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "cnbc-econ": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 6,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "cnbc-earn": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
       "new": 3,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "marketwatch-top": {
       "name": "MarketWatch",
       "ok": true,
       "items": 10,
-      "new": 0,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 1,
+      "at": "2026-11-19T03:47:53Z"
     },
     "fed-monetary": {
       "name": "Federal Reserve",
       "ok": true,
       "items": 15,
       "new": 1,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "ecb-press": {
       "name": "ECB",
       "ok": true,
       "items": 15,
       "new": 3,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "wsj-markets": {
       "name": "Wall Street Journal",
       "ok": true,
       "items": 61,
-      "new": 17,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 16,
+      "at": "2026-11-19T03:47:53Z"
     },
     "wsj-economy": {
       "name": "Wall Street Journal",
       "ok": true,
       "items": 36,
-      "new": 8,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 7,
+      "at": "2026-11-19T03:47:53Z"
     },
     "ft-markets": {
       "name": "Financial Times",
       "ok": true,
       "items": 25,
       "new": 0,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "ft-economy": {
       "name": "Financial Times",
       "ok": true,
       "items": 25,
-      "new": 3,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 6,
+      "at": "2026-11-19T03:47:53Z"
     },
     "economist-fe": {
       "name": "The Economist",
       "ok": true,
       "items": 300,
       "new": 3,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "yahoo-spx": {
       "name": "Yahoo Finance",
       "ok": true,
       "items": 20,
-      "new": 2,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 0,
+      "at": "2026-11-19T03:47:53Z"
     },
     "nikkei-asia": {
       "name": "Nikkei Asia",
       "ok": true,
       "items": 50,
-      "new": 2,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 1,
+      "at": "2026-11-19T03:47:53Z"
     },
     "scmp-business": {
       "name": "South China Morning Post",
       "ok": true,
       "items": 50,
-      "new": 18,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 17,
+      "at": "2026-11-19T03:47:53Z"
     },
     "cnbc-asia": {
       "name": "CNBC",
       "ok": true,
       "items": 30,
-      "new": 5,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 4,
+      "at": "2026-11-19T03:47:53Z"
     },
     "bbc-business": {
       "name": "BBC",
       "ok": true,
       "items": 49,
-      "new": 3,
-      "at": "2026-11-19T02:47:12Z"
+      "new": 2,
+      "at": "2026-11-19T03:47:53Z"
     },
     "guardian-business": {
       "name": "The Guardian",
       "ok": true,
       "items": 20,
       "new": 5,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "guardian-economics": {
       "name": "The Guardian",
       "ok": true,
       "items": 20,
       "new": 9,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "boe-news": {
       "name": "Bank of England",
       "ok": true,
       "items": 50,
       "new": 1,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     },
     "boj-news": {
       "name": "Bank of Japan",
       "ok": true,
       "items": 46,
       "new": 5,
-      "at": "2026-11-19T02:47:12Z"
+      "at": "2026-11-19T03:47:53Z"
     }
   },
   "jobs": {
     "news": {
-      "lastRun": "2026-11-19T02:47:12Z",
+      "lastRun": "2026-11-19T03:47:53Z",
       "ok": true,
-      "newItems": 129,
+      "newItems": 127,
       "stored": 1500
     },
     "market": {
-      "lastRun": "2026-11-19T02:47:29Z",
+      "lastRun": "2026-11-19T03:48:09Z",
       "ok": true,
-      "fetched": 33,
+      "fetched": 45,
       "live": [
         "AAPL",
         "ACB",
@@ -327,8 +327,8 @@
       "errors": []
     },
     "alerts": {
-      "lastRun": "2026-11-19T02:47:49Z",
-      "candidates": 1,
+      "lastRun": "2026-11-19T03:48:30Z",
+      "candidates": 0,
       "skipped": null
     },
     "digest": {
@@ -336,7 +336,7 @@
       "slot": "Morning"
     },
     "telegram": {
-      "lastRun": "2026-11-19T02:47:51Z",
+      "lastRun": "2026-11-19T03:48:30Z",
       "ok": true,
       "commands": 0
     }
